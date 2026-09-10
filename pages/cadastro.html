@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Cadastro</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="icon" type="logo2" href="../imgs/logo2.png">
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <header>
+        <nav>
+
+            <!-- LOGO -->
+            <a class="logo" href="../index.html">
+                <img src="../imgs/logo2.png" alt="logo" />
+            </a>
+
+            <!-- MENU MOBILE -->
+            <div class="mobile-menu">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+
+            <!-- MENU -->
+            <ul class="nav-list">
+                <li>
+                    <a href="../pages/produtos.html" title="Podutos">
+                        <img src="../imgs/product.svg" alt="Produtos">
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="../pages/cadastro.html" title="Cadastro">
+                        <img src="../imgs/person-fill.svg" alt="Cadastro">
+                    </a>
+                </li>
+
+                <li>
+                    <a href="../pages/carrinho.html" title="Carrinho">
+                        <img src="../imgs/cart4.svg" alt="Carrinho">
+                    </a>
+                </li>
+
+                <!-- BOTÃO TEMA -->
+                <button class="theme-button" id="themeButton" title="Alterar tema">
+                    <img src="../imgs/mudar tema.svg" alt="Alterar tema">
+                </button>
+            </ul>
+
+
+
+
+        </nav>
+    </header>
+
+
+    <!-- CADASTRO -->
+    <main class="register-page">
+
+        <div class="register-header">
+
+            <span>DRAGON SUPLEMENTOS</span>
+
+            <h1>
+                CRIE SUA <strong>CONTA</strong>
+            </h1>
+
+            <p>
+                Cadastre-se para acompanhar seus pedidos
+                e aproveitar uma experiência completa.
+            </p>
+
+        </div>
+
+
+        <section class="register-container">
+
+            <div class="register-form-box">
+
+                <div class="form-title">
+
+                    <h2>CADASTRO DE CLIENTE</h2>
+
+                    <p>
+                        Preencha seus dados abaixo.
+                    </p>
+
+                </div>
+
+
+                <form id="registerForm" novalidate>
+
+
+                    <!-- NOME -->
+                    <div class="form-group">
+
+                        <label for="nome">
+                            Nome
+                        </label>
+
+                        <input type="text" id="nome" name="nome" placeholder="Digite seu nome" required>
+
+                    </div>
+
+
+                    <!-- EMAIL -->
+                    <div class="form-group">
+
+                        <label for="email">
+                            E-mail
+                        </label>
+
+                        <input type="email" id="email" name="email" placeholder="Digite seu e-mail" required>
+
+                    </div>
+
+
+                    <!-- TELEFONE -->
+                    <div class="form-group">
+
+                        <label for="telefone">
+                            Telefone
+                        </label>
+
+                        <input type="tel" id="telefone" name="telefone" placeholder="(11) 99999-9999" maxlength="15"
+                            required>
+
+                    </div>
+
+
+                    <!-- CPF -->
+                    <div class="form-group">
+
+                        <label for="cpf">
+                            CPF
+                        </label>
+
+                        <input type="text" id="cpf" name="cpf" placeholder="000.000.000-00" maxlength="14" required>
+
+                    </div>
+
+
+                    <!-- DATA DE NASCIMENTO -->
+                    <div class="form-group">
+
+                        <label for="dataNascimento">
+                            Data de nascimento
+                        </label>
+
+                        <input type="date" id="dataNascimento" name="dataNascimento" required>
+
+                    </div>
+
+
+                    <!-- CATEGORIA -->
+                    <div class="form-group">
+
+                        <label for="categoria">
+                            Categoria
+                        </label>
+
+                        <select id="categoria" name="categoria" required>
+
+                            <option value="">
+                                Selecione uma opção
+                            </option>
+
+                            <option value="pessoa_fisica">
+                                Pessoa Física
+                            </option>
+
+                            <option value="pessoa_juridica">
+                                Pessoa Jurídica
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- SENHA -->
+                    <div class="form-group">
+
+                        <label for="senha">
+                            Senha
+                        </label>
+
+                        <input type="password" id="senha" name="senha" placeholder="Mínimo de 8 caracteres"
+                            minlength="8" required>
+
+                    </div>
+
+
+                    <!-- CONFIRMAR SENHA -->
+                    <div class="form-group">
+
+                        <label for="confirmarSenha">
+                            Confirmar senha
+                        </label>
+
+                        <input type="password" id="confirmarSenha" name="confirmarSenha"
+                            placeholder="Digite a senha novamente" minlength="8" required>
+
+                    </div>
+
+
+                    <!-- MENSAGEM -->
+                    <div id="formMessage" class="form-message"></div>
+
+
+                    <!-- BOTÃO -->
+                    <button type="submit" class="register-button">
+                        CADASTRAR
+                    </button>
+
+                </form>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer class="footer">
+
+        <p>
+            © 2026 Dragon Suplementos.
+            Todos os direitos reservados.
+        </p>
+
+    </footer>
+
+
+
+    <script src="../js/script.js"></script>
+
+</body>
+
+</html>
