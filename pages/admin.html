@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="icon" type="image/png" href="../imgs/logo2.png">
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <header>
+        <nav>
+
+            <a class="logo" href="../index.html">
+                <img src="../imgs/logo2.png" alt="Dragon Suplementos">
+            </a>
+
+            <div class="mobile-menu">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+
+            <ul class="nav-list">
+
+                <li>
+                    <a href="produtos.html" title="Produtos">
+                        <img src="../imgs/product.svg" alt="Produtos">
+                    </a>
+                </li>
+
+                <li>
+                    <a href="cadastro.html" title="Cadastro">
+                        <img src="../imgs/person-fill.svg" alt="Cadastro">
+                    </a>
+                </li>
+
+                <li>
+                    <a href="carrinho.html" title="Carrinho">
+                        <img src="../imgs/cart4.svg" alt="Carrinho">
+                    </a>
+                </li>
+
+                <li>
+                    <a href="../pages/admin.html" title="Admin">
+                        <img src="../imgs/shield-fill.svg" alt="Admin">
+                    </a>
+                </li>
+
+                <!-- BOTÃO TEMA -->
+                <button class="theme-button" id="themeButton" title="Alterar tema">
+                    <img src="../imgs/mudar tema.svg" alt="Alterar tema">
+                </button>
+            </ul>
+
+            </ul>
+
+        </nav>
+    </header>
+
+
+    <!-- DASHBOARD -->
+    <main class="dashboard-page">
+
+        <div class="dashboard-header">
+
+            <span>DRAGON SUPLEMENTOS</span>
+
+            <h1>
+                <strong>DASHBOARD</strong>
+            </h1>
+
+            <p>
+                Acompanhe os principais indicadores da loja.
+            </p>
+
+        </div>
+
+
+        <!-- CARDS -->
+        <section class="dashboard-cards">
+
+            <div class="dashboard-card">
+
+                <span class="dashboard-card-title">
+                    TOTAL DE PRODUTOS
+                </span>
+
+                <strong id="totalProdutos">
+                    -
+                </strong>
+
+            </div>
+
+
+            <div class="dashboard-card">
+
+                <span class="dashboard-card-title">
+                    DISPONÍVEIS
+                </span>
+
+                <strong id="produtosDisponiveis">
+                    -
+                </strong>
+
+            </div>
+
+
+            <div class="dashboard-card">
+
+                <span class="dashboard-card-title">
+                    INDISPONÍVEIS
+                </span>
+
+                <strong id="produtosIndisponiveis">
+                    -
+                </strong>
+
+            </div>
+
+        </section>
+
+
+        <!-- RELATÓRIOS -->
+        <section class="reports">
+
+            <div class="reports-header">
+
+                <span>ANÁLISE</span>
+
+                <h2>
+                    RELATÓRIOS <strong>DINÂMICOS</strong>
+                </h2>
+
+            </div>
+
+
+            <div class="reports-grid">
+
+                <div class="report-card">
+
+                    <span>
+                        VALOR TOTAL
+                    </span>
+
+                    <strong id="valorTotal">
+                        -
+                    </strong>
+
+                    <p>
+                        Valor consolidado dos produtos.
+                    </p>
+
+                </div>
+
+
+                <div class="report-card">
+
+                    <span>
+                        MAIOR PREÇO
+                    </span>
+
+                    <strong id="maiorPreco">
+                        -
+                    </strong>
+
+                    <p>
+                        Produto com maior valor.
+                    </p>
+
+                </div>
+
+
+                <div class="report-card">
+
+                    <span>
+                        MENOR PREÇO
+                    </span>
+
+                    <strong id="menorPreco">
+                        -
+                    </strong>
+
+                    <p>
+                        Produto com menor valor.
+                    </p>
+
+                </div>
+
+
+                <div class="report-card">
+
+                    <span>
+                        PREÇO MÉDIO
+                    </span>
+
+                    <strong id="precoMedio">
+                        -
+                    </strong>
+
+                    <p>
+                        Média dos preços cadastrados.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- CADASTRO DE PRODUTOS -->
+
+        <br>
+        <br>
+
+        <div class="cadastrop">
+
+            <h2>Cadastrar Novo Produto</h2>
+
+            <form id="produtoForm">
+
+                <!-- NOME -->
+                <div class="form-group">
+                    <label for="nome">Nome do Produto:</label>
+                    <input type="text" id="nome" required>
+                </div>
+
+                <!-- CATEGORIA -->
+                <div class="form-group">
+                    <label for="categoria">Categoria:</label>
+
+                    <select id="categoria" required>
+                        <option value="">Selecione uma categoria</option>
+                        <option value="suplementos">Suplementos</option>
+                        <option value="roupas">Roupas</option>
+                        <option value="acessorios">Acessórios</option>
+                        <option value="equipamentos">Equipamentos</option>
+                    </select>
+                </div>
+
+                <!-- PREÇO -->
+                <div class="form-group">
+                    <label for="preco">Preço (R$):</label>
+
+                    <input type="number" id="preco" step="0.01" min="0.01" required>
+                </div>
+
+                <!-- ESTOQUE -->
+                <div class="form-group">
+                    <label for="estoque">Estoque:</label>
+
+                    <input type="number" id="estoque" min="0" step="1" required>
+                </div>
+
+                <!-- DESCRIÇÃO -->
+                <div class="form-group">
+                    <label for="descricao">Descrição:</label>
+
+                    <textarea id="descricao" rows="4" required></textarea>
+                </div>
+
+                <!-- IMAGEM -->
+                <div class="form-group">
+                    <label for="imagem">Imagem do Produto:</label>
+
+                    <input type="file" id="imagem" accept="image/*" required>
+                </div>
+
+                <button type="submit">
+                    Cadastrar Produto
+                </button>
+
+            </form>
+
+        </div>
+
+
+        <!-- =====================================
+     LISTA DOS PRODUTOS
+===================================== -->
+
+        <div class="lista-produtos">
+
+            <h2>Produtos Cadastrados</h2>
+
+            <div id="produtosContainer" class="produtos-container">
+                <!-- Os produtos aparecerão aqui automaticamente -->
+            </div>
+
+        </div>
+
+
+        <!-- JAVASCRIPT -->
+        <script src="js/cadastro-produto.js"></script>
+    </main>
+
+    <script>
+        document.getElementById('produtoForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const formData = new FormData();
+
+            formData.append('nome', document.getElementById('nome').value);
+            formData.append('preco', document.getElementById('preco').value);
+            formData.append('descricao', document.getElementById('descricao').value);
+
+            const imagem = document.getElementById('imagem').files[0];
+
+            if (imagem) {
+                formData.append('imagem', imagem);
+            }
+
+            try {
+                const response = await fetch('http://127.0.0.1:8000/produtos', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const resultado = await response.json();
+
+                if (response.ok) {
+                    alert(`${resultado.message} Novo arquivo: ${resultado.slug}.json gerado.`);
+                    document.getElementById('produtoForm').reset();
+                } else {
+                    alert('Erro no servidor: ' + (resultado.detail || 'Erro desconhecido.'));
+                }
+
+            } catch (error) {
+                console.error('Erro na requisição:', error);
+                alert('Não foi possível conectar ao servidor Python.');
+            }
+        });
+    </script>
+
+
+    <footer>
+        <div class="footer">
+
+            <p>
+                © 2026 Dragon Suplementos. Todos os direitos reservados.
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <script src="../js/cadastro-produtos.js"></script>
+
+</body>
+
+</html>
