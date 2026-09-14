@@ -2111,5 +2111,33 @@ body.light-theme .report-card p {
     }
 }
 
+/* Tema claro - Cadastro de Produtos */
+
+body.light-theme .cadastrop {
+    background: #fff;
+    border-color: #ddd;
+}
+
+body.light-theme .cadastrop h1 {
+    color: #111;
+}
+
+body.light-theme .cadastrop label {
+    color: #222;
+}
+
+body.light-theme .cadastrop input,
+body.light-theme .cadastrop textarea,
+body.light-theme .cadastrop select {
+    background: #f5f5f5;
+    color: #111;
+    border-color: #ccc;
+}
+
+body.light-theme .cadastrop input::placeholder,
+body.light-theme .cadastrop textarea::placeholder {
+    color: #888;
+}
+
 
 
