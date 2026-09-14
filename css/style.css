@@ -939,46 +939,6 @@ body.light-theme .footer p {
 
 
 /* =========================
-   FILTROS
-========================= */
-
-.products-filters {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 12px;
-
-  margin-bottom: 50px;
-}
-
-.filter-button {
-  padding: 11px 20px;
-
-  background: transparent;
-  color: #888;
-
-  border: 1px solid #292929;
-  border-radius: 5px;
-
-  font-size: 12px;
-  font-weight: bold;
-  letter-spacing: 1px;
-
-  cursor: pointer;
-
-  transition: 0.3s;
-}
-
-.filter-button:hover,
-.filter-button.active {
-  background: #39FF14;
-  color: #050505;
-  border-color: #39FF14;
-}
-
-
-/* =========================
    GRID DE PRODUTOS
 ========================= */
 
