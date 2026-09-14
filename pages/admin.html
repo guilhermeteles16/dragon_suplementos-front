@@ -36,7 +36,7 @@
                 </li>
 
                 <li>
-                    <a href="cadastro.html" title="Cadastro">
+                    <a href="login-cadastro.html" title="Cadastro">
                         <img src="../imgs/person-fill.svg" alt="Cadastro">
                     </a>
                 </li>
@@ -336,6 +336,17 @@
                 alert('Não foi possível conectar ao servidor Python.');
             }
         });
+
+
+        const themeButton = document.getElementById("themeButton");
+
+        if (themeButton) {
+            themeButton.addEventListener("click", () => {
+                document.body.classList.toggle("light-theme");
+            });
+        }
+
+
     </script>
 
 
