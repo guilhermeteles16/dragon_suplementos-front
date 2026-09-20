@@ -2,75 +2,574 @@
 <html lang="pt-BR">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Admin</title>
 
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="icon" type="image/png" href="../imgs/logo2.png">
+    <link
+        rel="stylesheet"
+        href="../css/style.css"
+    >
+
+    <link
+        rel="icon"
+        type="image/png"
+        href="../imgs/logo2.png"
+    >
+
+    <style>
+
+        /* ==========================================
+           PRODUTOS CADASTRADOS
+        ========================================== */
+
+        .admin-products-section {
+
+            max-width: 1200px;
+
+            margin: 70px auto;
+
+            padding: 0 20px;
+
+        }
+
+
+        .admin-products-header {
+
+            margin-bottom: 30px;
+
+        }
+
+
+        .admin-products-header span {
+
+            color: #39FF14;
+
+            font-size: 13px;
+
+            font-weight: bold;
+
+            letter-spacing: 3px;
+
+        }
+
+
+        .admin-products-header h2 {
+
+            margin: 8px 0;
+
+            font-size: 32px;
+
+        }
+
+
+        .admin-products-header h2 strong {
+
+            color: #39FF14;
+
+        }
+
+
+        .admin-products-header p {
+
+            color: #999;
+
+        }
+
+
+        /* ==========================================
+           LISTA
+        ========================================== */
+
+        .admin-products-list {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 20px;
+
+        }
+
+
+        /* ==========================================
+           CARD
+        ========================================== */
+
+        .admin-product-card {
+
+            display: grid;
+
+            grid-template-columns:
+                110px 1fr;
+
+            gap: 18px;
+
+            padding: 20px;
+
+            border: 1px solid
+                rgba(57, 255, 20, 0.15);
+
+            border-radius: 14px;
+
+            background:
+                rgba(255, 255, 255, 0.03);
+
+            transition: 0.25s;
+
+        }
+
+
+        .admin-product-card:hover {
+
+            border-color:
+                rgba(57, 255, 20, 0.5);
+
+            transform:
+                translateY(-2px);
+
+        }
+
+
+        /* ==========================================
+           IMAGEM
+        ========================================== */
+
+        .admin-product-image {
+
+            width: 110px;
+
+            height: 110px;
+
+            border-radius: 10px;
+
+            overflow: hidden;
+
+            background: #111;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+        }
+
+
+        .admin-product-image img {
+
+            width: 100%;
+
+            height: 100%;
+
+            object-fit: contain;
+
+        }
+
+
+        /* ==========================================
+           INFORMAÇÕES
+        ========================================== */
+
+        .admin-product-info {
+
+            min-width: 0;
+
+        }
+
+
+        .admin-product-category {
+
+            color: #39FF14;
+
+            font-size: 11px;
+
+            font-weight: bold;
+
+            letter-spacing: 1px;
+
+            text-transform: uppercase;
+
+        }
+
+
+        .admin-product-info h3 {
+
+            margin: 6px 0;
+
+            font-size: 19px;
+
+        }
+
+
+        .admin-product-info p {
+
+            color: #999;
+
+            font-size: 13px;
+
+            line-height: 1.5;
+
+            margin: 0 0 12px;
+
+        }
+
+
+        .admin-product-details {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 10px;
+
+        }
+
+
+        .admin-product-details strong {
+
+            color: #39FF14;
+
+            font-size: 17px;
+
+        }
+
+
+        .admin-product-details span {
+
+            color: #666;
+
+            font-size: 11px;
+
+        }
+
+
+        /* ==========================================
+           BOTÕES
+        ========================================== */
+
+        .admin-product-actions {
+
+            grid-column: 1 / -1;
+
+            display: flex;
+
+            gap: 10px;
+
+        }
+
+
+        .admin-product-actions button {
+
+            flex: 1;
+
+            border: none;
+
+            padding: 11px;
+
+            border-radius: 8px;
+
+            cursor: pointer;
+
+            font-weight: bold;
+
+            transition: 0.2s;
+
+        }
+
+
+        .admin-edit-button {
+
+            background: #39FF14;
+
+            color: #000;
+
+        }
+
+
+        .admin-edit-button:hover {
+
+            opacity: 0.85;
+
+        }
+
+
+        .admin-delete-button {
+
+            background: #351010;
+
+            color: #ff4d4d;
+
+            border:
+                1px solid
+                rgba(255, 77, 77, 0.25) !important;
+
+        }
+
+
+        .admin-delete-button:hover {
+
+            background: #ff4d4d;
+
+            color: #fff;
+
+        }
+
+
+        /* ==========================================
+           MENSAGENS
+        ========================================== */
+
+        .admin-loading,
+        .admin-empty,
+        .admin-error {
+
+            grid-column: 1 / -1;
+
+            text-align: center;
+
+            padding: 30px;
+
+            color: #999;
+
+        }
+
+
+        .admin-error {
+
+            color: #ff4d4d;
+
+        }
+
+
+        /* ==========================================
+           CANCELAR EDIÇÃO
+        ========================================== */
+
+        .cancel-edit-button {
+
+            width: 100%;
+
+            margin-top: 10px;
+
+            padding: 12px;
+
+            border-radius: 8px;
+
+            border: 1px solid #555;
+
+            background: transparent;
+
+            color: #aaa;
+
+            cursor: pointer;
+
+            font-weight: bold;
+
+        }
+
+
+        .cancel-edit-button:hover {
+
+            color: #fff;
+
+            border-color: #999;
+
+        }
+
+
+        /* ==========================================
+           RESPONSIVO
+        ========================================== */
+
+        @media (max-width: 800px) {
+
+            .admin-products-list {
+
+                grid-template-columns: 1fr;
+
+            }
+
+        }
+
+
+        @media (max-width: 500px) {
+
+            .admin-product-card {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .admin-product-image {
+
+                width: 100%;
+
+                height: 180px;
+
+            }
+
+        }
+
+    </style>
+
 </head>
+
 
 <body>
 
-    <!-- NAVBAR -->
+
+    <!-- ==========================================
+         NAVBAR
+    ========================================== -->
+
     <header>
+
         <nav>
 
-            <a class="logo" href="../index.html">
-                <img src="../imgs/logo2.png" alt="Dragon Suplementos">
+            <a
+                class="logo"
+                href="../index.html"
+            >
+
+                <img
+                    src="../imgs/logo2.png"
+                    alt="Dragon Suplementos"
+                >
+
             </a>
 
+
             <div class="mobile-menu">
+
                 <div class="line1"></div>
+
                 <div class="line2"></div>
+
                 <div class="line3"></div>
+
             </div>
+
 
             <ul class="nav-list">
 
-                <li>
-                    <a href="produtos.html" title="Produtos">
-                        <img src="../imgs/product.svg" alt="Produtos">
-                    </a>
-                </li>
 
                 <li>
-                    <a href="login-cadastro.html" title="Cadastro">
-                        <img src="../imgs/person-fill.svg" alt="Cadastro">
+
+                    <a
+                        href="produtos.html"
+                        title="Produtos"
+                    >
+
+                        <img
+                            src="../imgs/product.svg"
+                            alt="Produtos"
+                        >
+
                     </a>
+
                 </li>
+
 
                 <li>
-                    <a href="carrinho.html" title="Carrinho">
-                        <img src="../imgs/cart4.svg" alt="Carrinho">
+
+                    <a
+                        href="login-cadastro.html"
+                        title="Cadastro"
+                    >
+
+                        <img
+                            src="../imgs/person-fill.svg"
+                            alt="Cadastro"
+                        >
+
                     </a>
+
                 </li>
+
 
                 <li>
-                    <a href="../pages/admin.html" title="Admin">
-                        <img src="../imgs/shield-fill.svg" alt="Admin">
+
+                    <a
+                        href="carrinho.html"
+                        title="Carrinho"
+                    >
+
+                        <img
+                            src="../imgs/cart4.svg"
+                            alt="Carrinho"
+                        >
+
                     </a>
+
                 </li>
 
-                <!-- BOTÃO TEMA -->
-                <button class="theme-button" id="themeButton" title="Alterar tema">
-                    <img src="../imgs/mudar tema.svg" alt="Alterar tema">
-                </button>
-            </ul>
+
+                <li>
+
+                    <a
+                        href="admin.html"
+                        title="Admin"
+                    >
+
+                        <img
+                            src="../imgs/shield-fill.svg"
+                            alt="Admin"
+                        >
+
+                    </a>
+
+                </li>
+
+
+                <li>
+
+                    <button
+                        class="theme-button"
+                        id="themeButton"
+                        title="Alterar tema"
+                    >
+
+                        <img
+                            src="../imgs/mudar tema.svg"
+                            alt="Alterar tema"
+                        >
+
+                    </button>
+
+                </li>
+
 
             </ul>
 
         </nav>
+
     </header>
 
 
-    <!-- DASHBOARD -->
+
+    <!-- ==========================================
+         DASHBOARD
+    ========================================== -->
+
     <main class="dashboard-page">
+
 
         <div class="dashboard-header">
 
-            <span>DRAGON SUPLEMENTOS</span>
+            <span>
+                DRAGON SUPLEMENTOS
+            </span>
 
             <h1>
                 <strong>DASHBOARD</strong>
@@ -83,8 +582,13 @@
         </div>
 
 
-        <!-- CARDS -->
+
+        <!-- ==========================================
+             CARDS
+        ========================================== -->
+
         <section class="dashboard-cards">
+
 
             <div class="dashboard-card">
 
@@ -124,24 +628,36 @@
 
             </div>
 
+
         </section>
 
 
-        <!-- RELATÓRIOS -->
+
+        <!-- ==========================================
+             RELATÓRIOS
+        ========================================== -->
+
         <section class="reports">
+
 
             <div class="reports-header">
 
-                <span>ANÁLISE</span>
+                <span>
+                    ANÁLISE
+                </span>
 
                 <h2>
-                    RELATÓRIOS <strong>DINÂMICOS</strong>
+
+                    RELATÓRIOS
+                    <strong>DINÂMICOS</strong>
+
                 </h2>
 
             </div>
 
 
             <div class="reports-grid">
+
 
                 <div class="report-card">
 
@@ -210,135 +726,222 @@
 
                 </div>
 
+
             </div>
 
         </section>
 
-        <!-- CADASTRO DE PRODUTOS -->
+
+
+        <!-- ==========================================
+             CADASTRO / EDIÇÃO
+        ========================================== -->
 
         <br>
         <br>
+
 
         <div class="cadastrop">
 
-            <h2>Cadastrar Novo Produto</h2>
+            <h2>
+                Cadastrar Novo Produto
+            </h2>
+
 
             <form id="produtoForm">
 
-                <!-- NOME -->
+
                 <div class="form-group">
-                    <label for="nome">Nome do Produto:</label>
-                    <input type="text" id="nome" required>
+
+                    <label for="nome">
+                        Nome do Produto:
+                    </label>
+
+                    <input
+                        type="text"
+                        id="nome"
+                        required
+                    >
+
                 </div>
 
-                <!-- CATEGORIA -->
-                <div class="form-group">
-                    <label for="categoria">Categoria:</label>
 
-                    <select id="categoria" required>
-                        <option value="">Selecione uma categoria</option>
-                        <option value="suplementos">Suplementos</option>
-                        <option value="roupas">Roupas</option>
-                        <option value="acessorios">Acessórios</option>
-                        <option value="equipamentos">Equipamentos</option>
+
+                <div class="form-group">
+
+                    <label for="categoria">
+                        Categoria:
+                    </label>
+
+                    <select
+                        id="categoria"
+                        required
+                    >
+
+                        <option value="">
+                            Selecione uma categoria
+                        </option>
+
+                        <option value="suplementos">
+                            Suplementos
+                        </option>
+
+                        <option value="roupas">
+                            Roupas
+                        </option>
+
+                        <option value="acessorios">
+                            Acessórios
+                        </option>
+
+                        <option value="equipamentos">
+                            Equipamentos
+                        </option>
+
                     </select>
+
                 </div>
 
-                <!-- PREÇO -->
+
+
                 <div class="form-group">
-                    <label for="preco">Preço (R$):</label>
 
-                    <input type="number" id="preco" step="0.01" min="0.01" required>
+                    <label for="preco">
+                        Preço (R$):
+                    </label>
+
+                    <input
+                        type="number"
+                        id="preco"
+                        step="0.01"
+                        min="0.01"
+                        required
+                    >
+
                 </div>
 
-                <!-- ESTOQUE -->
+
+
                 <div class="form-group">
-                    <label for="estoque">Estoque:</label>
 
-                    <input type="number" id="estoque" min="0" step="1" required>
+                    <label for="estoque">
+                        Estoque:
+                    </label>
+
+                    <input
+                        type="number"
+                        id="estoque"
+                        min="0"
+                        step="1"
+                        required
+                    >
+
                 </div>
 
-                <!-- DESCRIÇÃO -->
+
+
                 <div class="form-group">
-                    <label for="descricao">Descrição:</label>
 
-                    <textarea id="descricao" rows="4" required></textarea>
+                    <label for="descricao">
+                        Descrição:
+                    </label>
+
+                    <textarea
+                        id="descricao"
+                        rows="4"
+                        required
+                    ></textarea>
+
                 </div>
 
-                <!-- IMAGEM -->
+
+
                 <div class="form-group">
-                    <label for="imagem">Imagem do Produto:</label>
 
-                    <input type="file" id="imagem" accept="image/*" required>
+                    <label for="imagem">
+                        Imagem do Produto:
+                    </label>
+
+                    <input
+                        type="file"
+                        id="imagem"
+                        accept="image/*"
+                    >
+
+                    <small>
+                        Ao editar, deixe vazio para manter a imagem atual.
+                    </small>
+
                 </div>
+
+
 
                 <button type="submit">
                     Cadastrar Produto
                 </button>
 
+
             </form>
 
         </div>
 
-        <!-- JAVASCRIPT -->
-        <script src="js/cadastro-produto.js"></script>
+
+
+        <!-- ==========================================
+             PRODUTOS CADASTRADOS
+        ========================================== -->
+
+        <section class="admin-products-section">
+
+
+            <div class="admin-products-header">
+
+                <span>
+                    GERENCIAMENTO
+                </span>
+
+                <h2>
+                    PRODUTOS
+                    <strong>CADASTRADOS</strong>
+                </h2>
+
+                <p>
+                    Edite ou exclua os produtos cadastrados na loja.
+                </p>
+
+            </div>
+
+
+            <div
+                class="admin-products-list"
+                id="listaProdutosAdmin"
+            >
+
+                <p class="admin-loading">
+                    Carregando produtos...
+                </p>
+
+            </div>
+
+
+        </section>
+
+
     </main>
 
-    <script>
-        document.getElementById('produtoForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-
-            const formData = new FormData();
-
-            formData.append('nome', document.getElementById('nome').value);
-            formData.append('preco', document.getElementById('preco').value);
-            formData.append('descricao', document.getElementById('descricao').value);
-
-            const imagem = document.getElementById('imagem').files[0];
-
-            if (imagem) {
-                formData.append('imagem', imagem);
-            }
-
-            try {
-                const response = await fetch('http://127.0.0.1:8000/produtos', {
-                    method: 'POST',
-                    body: formData
-                });
-
-                const resultado = await response.json();
-
-                if (response.ok) {
-                    alert(`${resultado.message} Novo arquivo: ${resultado.slug}.json gerado.`);
-                    document.getElementById('produtoForm').reset();
-                } else {
-                    alert('Erro no servidor: ' + (resultado.detail || 'Erro desconhecido.'));
-                }
-
-            } catch (error) {
-                console.error('Erro na requisição:', error);
-                alert('Não foi possível conectar ao servidor Python.');
-            }
-        });
 
 
-        const themeButton = document.getElementById("themeButton");
-
-        if (themeButton) {
-            themeButton.addEventListener("click", () => {
-                document.body.classList.toggle("light-theme");
-            });
-        }
-
-
-    </script>
-
+    <!-- ==========================================
+         FOOTER
+    ========================================== -->
 
     <footer>
+
         <div class="footer">
 
             <p>
-                © 2026 Dragon Suplementos. Todos os direitos reservados.
+                © 2026 Dragon Suplementos.
+                Todos os direitos reservados.
             </p>
 
         </div>
@@ -346,7 +949,15 @@
     </footer>
 
 
+
+    <!-- ==========================================
+         JAVASCRIPT
+    ========================================== -->
+
+    <script src="../js/script.js"></script>
+
     <script src="../js/cadastro-produtos.js"></script>
+
 
 </body>
 
