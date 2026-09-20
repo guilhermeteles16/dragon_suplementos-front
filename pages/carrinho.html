@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Carrinho | Dragon Suplementos</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+    <!-- MENU -->
+    <header>
+        <nav>
+
+            <a class="logo" href="../index.html">
+                <img src="../imgs/logo2.png" alt="Dragon Suplementos">
+            </a>
+
+            <div class="mobile-menu">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+
+            <ul class="nav-list">
+
+                <li>
+                    <a href="produtos.html" title="Produtos">
+                        <img src="../imgs/product.svg" alt="Produtos">
+                    </a>
+                </li>
+
+                <li>
+                    <a href="login-cadastro.html" title="Cadastro">
+                        <img src="../imgs/person-fill.svg" alt="Cadastro">
+                    </a>
+                </li>
+
+                <li>
+                    <a href="carrinho.html" title="Carrinho">
+                        <img src="../imgs/cart4.svg" alt="Carrinho">
+                    </a>
+                </li>
+
+                <li>
+                    <a href="../pages/admin.html" title="Admin">
+                        <img src="../imgs/shield-fill.svg" alt="Admin">
+                    </a>
+                </li>
+
+                <!-- BOTÃO TEMA -->
+                <button class="theme-button" id="themeButton" title="Alterar tema">
+                    <img src="../imgs/mudar tema.svg" alt="Alterar tema">
+                </button>
+            </ul>
+
+            </ul>
+
+        </nav>
+    </header>
+
+
+    <!-- CARRINHO -->
+    <main class="cart-page">
+
+        <section class="cart-header">
+
+            <span>DRAGON SUPLEMENTOS</span>
+
+            <h1>SEU <strong>CARRINHO</strong></h1>
+
+            <p>
+                Confira os produtos adicionados ao seu carrinho.
+            </p>
+
+        </section>
+
+
+        <section class="cart-container">
+
+            <!--
+                MODELO DOS PRODUTOS
+
+                Futuramente o backend irá preencher
+                esta área automaticamente.
+
+                Exemplo de estrutura que será gerada:
+
+                <article class="cart-item">
+
+                    <div class="cart-item-image">
+                        <img src="imagem-do-produto">
+                    </div>
+
+                    <div class="cart-item-info">
+                        <span>CATEGORIA</span>
+                        <h2>Nome do produto</h2>
+                        <p>Descrição</p>
+                        <strong>R$ 00,00</strong>
+                    </div>
+
+                    <div class="cart-item-actions">
+
+                        <div class="cart-quantity">
+                            <button>-</button>
+                            <span>1</span>
+                            <button>+</button>
+                        </div>
+
+                        <button class="remove-item">
+                            Remover
+                        </button>
+
+                    </div>
+
+                </article>
+            -->
+
+            <div class="cart-products">
+
+                <!-- Produtos serão inseridos aqui pelo backend -->
+
+            </div>
+
+
+            <!-- RESUMO -->
+            <aside class="cart-summary">
+
+                <h2>RESUMO DO PEDIDO</h2>
+
+                <div class="summary-line">
+                    <span>Subtotal</span>
+                    <strong id="cartSubtotal">R$ 0,00</strong>
+                </div>
+
+                <div class="summary-line">
+                    <span>Frete</span>
+                    <strong class="free-shipping">
+                        GRÁTIS
+                    </strong>
+                </div>
+
+                <div class="summary-divider"></div>
+
+                <div class="summary-total">
+                    <span>Total</span>
+                    <strong id="cartTotal">R$ 0,00</strong>
+                </div>
+
+                <button class="checkout-button">
+                    FINALIZAR COMPRA
+                </button>
+
+                <a href="produtos.html" class="continue-shopping">
+                    CONTINUAR COMPRANDO
+                </a>
+
+            </aside>
+
+        </section>
+
+    </main>
+
+
+    <!-- RODAPÉ -->
+    <footer>
+
+        <p>
+            © 2026 Dragon Suplementos. Todos os direitos reservados.
+        </p>
+
+    </footer>
+
+
+    <script src="../js/script.js"></script>
+
+</body>
+
+</html>
