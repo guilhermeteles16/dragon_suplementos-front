@@ -15,7 +15,7 @@ async function carregarProdutos() {
     try {
 
         const resposta = await fetch(
-            "http://127.0.0.1:5000/api/produtos"
+            "https://dragon-suplementos-back-end.onrender.com/api/produtos"
         );
 
         console.log("📡 Status da API:", resposta.status);
