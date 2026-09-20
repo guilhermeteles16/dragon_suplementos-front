@@ -2629,3 +2629,490 @@ body.light-theme .cadastrop textarea::placeholder {
     text-align: center;
 
 }
+
+
+/* ==========================================
+   RESUMO DO CARRINHO
+========================================== */
+
+.cart-summary {
+    background: #0b0b0b;
+    border: 1px solid #222;
+    border-radius: 12px;
+    padding: 25px;
+}
+
+.cart-summary h2 {
+    margin-bottom: 25px;
+    color: #fff;
+    font-size: 20px;
+}
+
+.summary-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.summary-line span {
+    color: #aaa;
+}
+
+.summary-line strong {
+    color: #fff;
+}
+
+.free-shipping {
+    color: #39FF14 !important;
+}
+
+.summary-divider {
+    width: 100%;
+    height: 1px;
+    background: #252525;
+    margin: 20px 0;
+}
+
+.summary-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.summary-total span {
+    color: #fff;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.summary-total strong {
+    color: #39FF14;
+    font-size: 22px;
+}
+
+
+/* ==========================================
+   BOTÃO FINALIZAR COMPRA
+========================================== */
+
+.checkout-button {
+    display: block;
+    width: 100%;
+
+    padding: 15px 20px;
+
+    border: none;
+    border-radius: 8px;
+
+    background: #39FF14;
+    color: #050505;
+
+    font-size: 14px;
+    font-weight: 900;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.checkout-button:hover {
+    background: #2fe00f;
+    transform: translateY(-2px);
+    box-shadow: 0 0 15px rgba(57, 255, 20, 0.25);
+}
+
+.continue-shopping {
+    display: block;
+
+    margin-top: 15px;
+
+    text-align: center;
+
+    color: #aaa;
+
+    font-size: 14px;
+    text-decoration: none;
+
+    transition: 0.2s;
+}
+
+.continue-shopping:hover {
+    color: #39FF14;
+}
+
+
+/* ==========================================
+   MODAL
+========================================== */
+
+.checkout-modal {
+    position: fixed;
+    inset: 0;
+
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    background: rgba(0, 0, 0, 0.78);
+
+    z-index: 9999;
+}
+
+.checkout-modal.active {
+    display: flex;
+}
+
+
+/* ==========================================
+   CAIXA DO MODAL
+========================================== */
+
+.checkout-box {
+    position: relative;
+
+    width: 100%;
+    max-width: 500px;
+
+    padding: 35px;
+
+    background: #0b0b0b;
+
+    border: 1px solid rgba(57, 255, 20, 0.35);
+
+    border-radius: 14px;
+
+    box-shadow: 0 0 30px rgba(57, 255, 20, 0.12);
+
+    animation: checkoutEntrada 0.25s ease;
+}
+
+@keyframes checkoutEntrada {
+
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.97);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+}
+
+
+/* ==========================================
+   BOTÃO FECHAR
+========================================== */
+
+.checkout-close {
+    position: absolute;
+
+    top: 10px;
+    right: 15px;
+
+    width: 35px;
+    height: 35px;
+
+    border: none;
+    background: transparent;
+
+    color: #aaa;
+
+    font-size: 28px;
+    line-height: 1;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.checkout-close:hover {
+    color: #39FF14;
+    transform: scale(1.1);
+}
+
+
+/* ==========================================
+   TÍTULO DO MODAL
+========================================== */
+
+.checkout-box > span {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #39FF14;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    letter-spacing: 3px;
+}
+
+.checkout-box h2 {
+    margin: 0;
+
+    color: #fff;
+
+    font-size: 30px;
+}
+
+.checkout-box h2 strong {
+    color: #39FF14;
+}
+
+.checkout-description {
+    margin: 10px 0 25px;
+
+    color: #999;
+
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+
+/* ==========================================
+   TOTAL DA COMPRA
+========================================== */
+
+.checkout-summary {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 16px;
+
+    margin-bottom: 22px;
+
+    background: #111;
+
+    border: 1px solid #222;
+
+    border-radius: 8px;
+}
+
+.checkout-summary span {
+    color: #aaa;
+    font-size: 14px;
+}
+
+.checkout-summary strong {
+    color: #39FF14;
+    font-size: 19px;
+}
+
+
+/* ==========================================
+   CAMPOS
+========================================== */
+
+.checkout-field {
+    margin-bottom: 18px;
+}
+
+.checkout-field label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #ddd;
+
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.checkout-field input,
+.checkout-field select {
+    width: 100%;
+
+    box-sizing: border-box;
+
+    padding: 13px 14px;
+
+    background: #111;
+
+    border: 1px solid #292929;
+
+    border-radius: 7px;
+
+    color: #fff;
+
+    font-size: 14px;
+
+    outline: none;
+
+    transition: 0.2s;
+}
+
+.checkout-field input::placeholder {
+    color: #666;
+}
+
+.checkout-field input:focus,
+.checkout-field select:focus {
+    border-color: #39FF14;
+
+    box-shadow: 0 0 8px rgba(57, 255, 20, 0.15);
+}
+
+.checkout-field select {
+    cursor: pointer;
+}
+
+
+/* ==========================================
+   ERRO
+========================================== */
+
+.checkout-error {
+    min-height: 18px;
+
+    margin: 0 0 10px;
+
+    color: #ff4444;
+
+    font-size: 13px;
+    font-weight: 600;
+}
+
+
+/* ==========================================
+   CONFIRMAR PEDIDO
+========================================== */
+
+.confirmar-compra {
+    display: block;
+
+    width: 100%;
+
+    padding: 14px;
+
+    border: none;
+    border-radius: 7px;
+
+    background: #39FF14;
+    color: #050505;
+
+    font-size: 14px;
+    font-weight: 900;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.confirmar-compra:hover {
+    background: #2fe00f;
+
+    transform: translateY(-1px);
+
+    box-shadow: 0 0 15px rgba(57, 255, 20, 0.25);
+}
+
+.confirmar-compra:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+
+/* ==========================================
+   TEMA CLARO
+========================================== */
+
+body.light-theme .cart-summary {
+    background: #fff;
+    border-color: #ddd;
+}
+
+body.light-theme .cart-summary h2 {
+    color: #111;
+}
+
+body.light-theme .summary-line span {
+    color: #555;
+}
+
+body.light-theme .summary-line strong {
+    color: #222;
+}
+
+body.light-theme .summary-total span {
+    color: #111;
+}
+
+body.light-theme .summary-divider {
+    background: #ddd;
+}
+
+body.light-theme .checkout-box {
+    background: #fff;
+    border-color: rgba(57, 180, 20, 0.35);
+}
+
+body.light-theme .checkout-box h2 {
+    color: #111;
+}
+
+body.light-theme .checkout-description {
+    color: #666;
+}
+
+body.light-theme .checkout-summary {
+    background: #f5f5f5;
+    border-color: #ddd;
+}
+
+body.light-theme .checkout-summary span {
+    color: #555;
+}
+
+body.light-theme .checkout-field label {
+    color: #222;
+}
+
+body.light-theme .checkout-field input,
+body.light-theme .checkout-field select {
+    background: #f7f7f7;
+    color: #111;
+    border-color: #ddd;
+}
+
+body.light-theme .checkout-field input::placeholder {
+    color: #999;
+}
+
+body.light-theme .checkout-close {
+    color: #555;
+}
+
+
+/* ==========================================
+   RESPONSIVO
+========================================== */
+
+@media (max-width: 600px) {
+
+    .checkout-box {
+        padding: 28px 22px;
+    }
+
+    .checkout-box h2 {
+        font-size: 25px;
+    }
+
+    .checkout-summary {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+}
+

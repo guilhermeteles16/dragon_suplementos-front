@@ -48,18 +48,21 @@
                 </li>
 
                 <li>
-                    <a href="../pages/admin.html" title="Admin">
+                    <a href="admin.html" title="Admin">
                         <img src="../imgs/shield-fill.svg" alt="Admin">
                     </a>
                 </li>
 
-                <!-- BOTÃO TEMA -->
-                <button class="theme-button" id="themeButton" title="Alterar tema">
+                <button
+                    class="theme-button"
+                    id="themeButton"
+                    title="Alterar tema"
+                    type="button"
+                >
                     <img src="../imgs/mudar tema.svg" alt="Alterar tema">
                 </button>
+
             </ul>
-
-
 
         </nav>
     </header>
@@ -72,7 +75,9 @@
 
             <span>DRAGON SUPLEMENTOS</span>
 
-            <h1>SEU <strong>CARRINHO</strong></h1>
+            <h1>
+                SEU <strong>CARRINHO</strong>
+            </h1>
 
             <p>
                 Confira os produtos adicionados ao seu carrinho.
@@ -83,80 +88,68 @@
 
         <section class="cart-container">
 
-            <!--
-                MODELO DOS PRODUTOS
-
-                Futuramente o backend irá preencher
-                esta área automaticamente.
-
-                Exemplo de estrutura que será gerada:
-
-                <article class="cart-item">
-
-                    <div class="cart-item-image">
-                        <img src="imagem-do-produto">
-                    </div>
-
-                    <div class="cart-item-info">
-                        <span>CATEGORIA</span>
-                        <h2>Nome do produto</h2>
-                        <p>Descrição</p>
-                        <strong>R$ 00,00</strong>
-                    </div>
-
-                    <div class="cart-item-actions">
-
-                        <div class="cart-quantity">
-                            <button>-</button>
-                            <span>1</span>
-                            <button>+</button>
-                        </div>
-
-                        <button class="remove-item">
-                            Remover
-                        </button>
-
-                    </div>
-
-                </article>
-            -->
+            <!-- PRODUTOS -->
 
             <div class="cart-products">
 
-                <!-- Produtos serão inseridos aqui pelo backend -->
+                <!--
+                    Os produtos serão carregados
+                    automaticamente pelo carrinho.js.
+                -->
 
             </div>
 
 
             <!-- RESUMO -->
+
             <aside class="cart-summary">
 
                 <h2>RESUMO DO PEDIDO</h2>
 
                 <div class="summary-line">
+
                     <span>Subtotal</span>
-                    <strong id="cartSubtotal">R$ 0,00</strong>
+
+                    <strong id="cartSubtotal">
+                        R$ 0,00
+                    </strong>
+
                 </div>
 
                 <div class="summary-line">
+
                     <span>Frete</span>
+
                     <strong class="free-shipping">
                         GRÁTIS
                     </strong>
+
                 </div>
 
                 <div class="summary-divider"></div>
 
                 <div class="summary-total">
+
                     <span>Total</span>
-                    <strong id="cartTotal">R$ 0,00</strong>
+
+                    <strong id="cartTotal">
+                        R$ 0,00
+                    </strong>
+
                 </div>
 
-                <button class="checkout-button">
+                <button
+                    class="checkout-button"
+                    id="finalizarCompra"
+                    type="button"
+                >
                     FINALIZAR COMPRA
                 </button>
 
-                <a href="produtos.html" class="continue-shopping">
+                <a
+                    href="produtos.html"
+                    class="continue-shopping"
+                >
                     CONTINUAR COMPRANDO
                 </a>
 
@@ -167,7 +160,122 @@
     </main>
 
 
+    <!-- MODAL DE FINALIZAÇÃO -->
+
+    <div
+        class="checkout-modal"
+        id="checkoutModal"
+    >
+
+        <div class="checkout-box">
+
+            <button
+                class="checkout-close"
+                id="fecharCheckout"
+                type="button"
+            >
+                ×
+            </button>
+
+            <span>DRAGON SUPLEMENTOS</span>
+
+            <h2>
+                FINALIZAR <strong>PEDIDO</strong>
+            </h2>
+
+            <p class="checkout-description">
+                Confira os dados antes de confirmar sua compra.
+            </p>
+
+
+            <!-- TOTAL -->
+
+            <div class="checkout-summary">
+
+                <span>
+                    Total da compra
+                </span>
+
+                <strong id="checkoutTotal">
+                    R$ 0,00
+                </strong>
+
+            </div>
+
+
+            <!-- ENDEREÇO -->
+
+            <div class="checkout-field">
+
+                <label for="enderecoEntrega">
+                    Endereço de entrega
+                </label>
+
+                <input
+                    type="text"
+                    id="enderecoEntrega"
+                    placeholder="Digite seu endereço"
+                >
+
+            </div>
+
+
+            <!-- PAGAMENTO -->
+
+            <div class="checkout-field">
+
+                <label for="formaPagamento">
+                    Forma de pagamento
+                </label>
+
+                <select id="formaPagamento">
+
+                    <option value="">
+                        Selecione
+                    </option>
+
+                    <option value="pix">
+                        PIX
+                    </option>
+
+                    <option value="cartao">
+                        Cartão
+                    </option>
+
+                    <option value="boleto">
+                        Boleto
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- MENSAGEM DE ERRO -->
+
+            <p
+                class="checkout-error"
+                id="checkoutError"
+            ></p>
+
+
+            <!-- CONFIRMAR -->
+
+            <button
+                class="confirmar-compra"
+                id="confirmarCompra"
+                type="button"
+            >
+                CONFIRMAR PEDIDO
+            </button>
+
+        </div>
+
+    </div>
+
+
     <!-- RODAPÉ -->
+
     <footer>
 
         <div class="footer">
@@ -180,7 +288,6 @@
         </div>
 
     </footer>
-
 
 
     <script src="../js/script.js"></script>
