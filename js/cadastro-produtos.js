@@ -723,3 +723,220 @@ document.addEventListener(
 
     }
 );
+
+// ======================================================
+// DASHBOARD
+// ======================================================
+
+function formatarMoeda(valor) {
+    return Number(valor || 0).toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL"
+    });
+}
+
+
+async function carregarDashboard() {
+
+    try {
+
+        // ==================================================
+        // BUSCAR DADOS DO DASHBOARD
+        // ==================================================
+
+        const respostaDashboard = await fetch(
+            `${API_URL}/api/dashboard`
+        );
+
+        if (!respostaDashboard.ok) {
+            throw new Error("Erro ao carregar dashboard.");
+        }
+
+        const dadosDashboard =
+            await respostaDashboard.json();
+
+
+        // ==================================================
+        // BUSCAR PRODUTOS
+        // ==================================================
+
+        const respostaProdutos = await fetch(
+            `${API_URL}/api/produtos`
+        );
+
+        if (!respostaProdutos.ok) {
+            throw new Error("Erro ao buscar produtos.");
+        }
+
+        const produtos =
+            await respostaProdutos.json();
+
+
+        // ==================================================
+        // CALCULAR ESTOQUE TOTAL
+        // ==================================================
+
+        let estoqueTotal = 0;
+        let produtosIndisponiveis = 0;
+
+
+        produtos.forEach(produto => {
+
+            const estoque = Number(produto.estoque || 0);
+
+            // Soma a quantidade existente no estoque
+            estoqueTotal += estoque;
+
+
+            // Produto sem estoque
+            if (estoque <= 0) {
+                produtosIndisponiveis++;
+            }
+
+        });
+
+
+        // ==================================================
+        // PEGAR ELEMENTOS DO DASHBOARD
+        // ==================================================
+
+        const totalProdutos =
+            document.getElementById("totalProdutos");
+
+        const disponiveis =
+            document.getElementById("produtosDisponiveis");
+
+        const indisponiveis =
+            document.getElementById("produtosIndisponiveis");
+
+        const valorTotal =
+            document.getElementById("valorTotal");
+
+        const maiorPreco =
+            document.getElementById("maiorPreco");
+
+        const menorPreco =
+            document.getElementById("menorPreco");
+
+        const precoMedio =
+            document.getElementById("precoMedio");
+
+
+        // ==================================================
+        // TOTAL DE PRODUTOS
+        // ==================================================
+
+        if (totalProdutos) {
+            totalProdutos.textContent = produtos.length;
+        }
+
+
+        // ==================================================
+        // DISPONÍVEIS
+        // ==================================================
+        // Aqui mostra a SOMA DO ESTOQUE
+
+        if (disponiveis) {
+            disponiveis.textContent = estoqueTotal;
+        }
+
+
+        // ==================================================
+        // INDISPONÍVEIS
+        // ==================================================
+        // Aqui mostra quantos produtos estão com estoque 0
+
+        if (indisponiveis) {
+            indisponiveis.textContent = produtosIndisponiveis;
+        }
+
+
+        // ==================================================
+        // VALOR TOTAL
+        // ==================================================
+
+        if (valorTotal) {
+            valorTotal.textContent =
+                formatarMoeda(
+                    dadosDashboard.valor_total
+                );
+        }
+
+
+        // ==================================================
+        // MAIOR PREÇO
+        // ==================================================
+
+        if (maiorPreco) {
+            maiorPreco.textContent =
+                formatarMoeda(
+                    dadosDashboard.preco_maximo
+                );
+        }
+
+
+        // ==================================================
+        // MENOR PREÇO
+        // ==================================================
+
+        if (menorPreco) {
+            menorPreco.textContent =
+                formatarMoeda(
+                    dadosDashboard.preco_minimo
+                );
+        }
+
+
+        // ==================================================
+        // PREÇO MÉDIO
+        // ==================================================
+
+        if (precoMedio) {
+            precoMedio.textContent =
+                formatarMoeda(
+                    dadosDashboard.preco_medio
+                );
+        }
+
+
+        // ==================================================
+        // DEBUG
+        // ==================================================
+
+        console.log("================================");
+        console.log("📊 DASHBOARD");
+        console.log("Total de produtos:", produtos.length);
+        console.log("Estoque total:", estoqueTotal);
+        console.log(
+            "Produtos indisponíveis:",
+            produtosIndisponiveis
+        );
+        console.log("================================");
+
+
+    } catch (erro) {
+
+        console.error(
+            "❌ Erro ao carregar dashboard:",
+            erro
+        );
+
+    }
+
+}
+
+
+// ======================================================
+// INICIALIZAÇÃO
+// ======================================================
+
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+        carregarProdutosAdmin();
+        carregarDashboard();
+
+    }
+);
+

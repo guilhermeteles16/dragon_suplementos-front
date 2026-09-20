@@ -2099,36 +2099,32 @@ body.light-theme .cadastrop textarea::placeholder {
     color: #888;
 }
 
-/* ========================= */
-/* CARRINHO */
-/* ========================= */
+/* ==========================================
+   CARRINHO
+========================================== */
 
 .cart-page {
-    min-height: calc(100vh - 100px);
-    padding: 80px 8%;
-    background: #050505;
+    width: 100%;
+    padding: 80px 30px;
 }
 
-
-/* CABEÇALHO */
-
 .cart-header {
-    max-width: 700px;
+    max-width: 1200px;
     margin: 0 auto 50px;
     text-align: center;
 }
 
 .cart-header span {
     color: #39FF14;
-    font-size: 12px;
-    font-weight: bold;
-    letter-spacing: 3px;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 4px;
 }
 
 .cart-header h1 {
-    margin: 15px 0;
-    color: #fff;
+    margin: 10px 0;
     font-size: 48px;
+    color: #fff;
 }
 
 .cart-header h1 strong {
@@ -2136,24 +2132,29 @@ body.light-theme .cadastrop textarea::placeholder {
 }
 
 .cart-header p {
-    color: #888;
-    font-size: 16px;
+    color: #999;
 }
 
 
-/* CONTAINER */
+/* ==========================================
+   CONTAINER
+========================================== */
 
 .cart-container {
     max-width: 1200px;
-    margin: 0 auto;
+    margin: auto;
 
     display: grid;
     grid-template-columns: 1fr 350px;
     gap: 30px;
+
+    align-items: start;
 }
 
 
-/* PRODUTOS */
+/* ==========================================
+   PRODUTOS
+========================================== */
 
 .cart-products {
     display: flex;
@@ -2162,110 +2163,136 @@ body.light-theme .cadastrop textarea::placeholder {
 }
 
 
-/* ITEM DO CARRINHO */
+/* ==========================================
+   ITEM
+========================================== */
 
 .cart-item {
-    display: flex;
+    display: grid;
+
+    grid-template-columns:
+        120px
+        1fr
+        auto;
+
+    gap: 25px;
+
     align-items: center;
-    gap: 20px;
 
     padding: 20px;
 
-    background: #0d0d0d;
-    border: 1px solid #222;
-    border-radius: 8px;
+    background: #101010;
+
+    border: 1px solid #202020;
+
+    border-radius: 12px;
 }
 
 
-/* IMAGEM */
+/* ==========================================
+   IMAGEM
+========================================== */
 
 .cart-item-image {
-    width: 110px;
-    height: 110px;
+    width: 120px;
+    height: 120px;
 
     display: flex;
     align-items: center;
     justify-content: center;
-
-    background: #151515;
-    border-radius: 6px;
-    flex-shrink: 0;
 }
 
 .cart-item-image img {
-    width: 70px;
-    height: 70px;
+    width: 100%;
+    height: 100%;
+
     object-fit: contain;
 }
 
 
-/* INFORMAÇÕES */
+/* ==========================================
+   INFORMAÇÕES
+========================================== */
 
-.cart-item-info {
-    flex: 1;
-}
-
-.cart-item-info > span {
+.cart-item-info span {
     color: #39FF14;
-    font-size: 10px;
-    font-weight: bold;
+
+    font-size: 12px;
+    font-weight: 700;
+
     letter-spacing: 2px;
 }
 
 .cart-item-info h2 {
-    margin: 7px 0;
+    margin: 8px 0;
+
     color: #fff;
-    font-size: 20px;
+
+    font-size: 22px;
 }
 
 .cart-item-info p {
     margin-bottom: 10px;
-    color: #777;
-    font-size: 13px;
-    line-height: 1.5;
+
+    color: #888;
+
+    font-size: 14px;
 }
 
-.cart-item-info > strong {
+.cart-item-info strong {
     color: #39FF14;
-    font-size: 17px;
+
+    font-size: 18px;
 }
 
 
-/* AÇÕES */
+/* ==========================================
+   AÇÕES
+========================================== */
 
 .cart-item-actions {
     display: flex;
     flex-direction: column;
+
     align-items: center;
-    gap: 12px;
+
+    gap: 15px;
 }
 
 
-/* QUANTIDADE */
+/* ==========================================
+   QUANTIDADE
+========================================== */
 
 .cart-quantity {
     display: flex;
     align-items: center;
 
     border: 1px solid #333;
-    border-radius: 5px;
+
+    border-radius: 6px;
+
     overflow: hidden;
 }
 
 .cart-quantity button {
-    width: 32px;
-    height: 32px;
+    width: 35px;
+    height: 35px;
 
     border: none;
-    background: #151515;
+
+    background: #181818;
+
     color: #39FF14;
 
+    font-size: 20px;
+
     cursor: pointer;
-    font-size: 18px;
 }
 
 .cart-quantity button:hover {
-    background: #222;
+    background: #39FF14;
+    color: #000;
 }
 
 .cart-quantity span {
@@ -2274,20 +2301,36 @@ body.light-theme .cadastrop textarea::placeholder {
     text-align: center;
 
     color: #fff;
-    font-size: 14px;
+
+    font-weight: 700;
 }
 
 
-/* REMOVER */
+/* ==========================================
+   SUBTOTAL
+========================================== */
+
+.cart-item-subtotal {
+    color: #fff;
+
+    font-size: 16px;
+}
+
+
+/* ==========================================
+   REMOVER
+========================================== */
 
 .remove-item {
     border: none;
-    background: none;
 
-    color: #777;
+    background: transparent;
+
+    color: #888;
+
+    font-size: 11px;
 
     cursor: pointer;
-    font-size: 12px;
 }
 
 .remove-item:hover {
@@ -2295,41 +2338,37 @@ body.light-theme .cadastrop textarea::placeholder {
 }
 
 
-/* ========================= */
-/* RESUMO */
-/* ========================= */
+/* ==========================================
+   RESUMO
+========================================== */
 
 .cart-summary {
-    height: fit-content;
-
     padding: 25px;
 
-    background: #0d0d0d;
-    border: 1px solid #222;
-    border-radius: 8px;
+    background: #101010;
+
+    border: 1px solid #202020;
+
+    border-radius: 12px;
 }
 
 .cart-summary h2 {
     margin-bottom: 25px;
 
     color: #fff;
+
     font-size: 18px;
 }
-
-
-/* LINHAS */
 
 .summary-line,
 .summary-total {
     display: flex;
-    align-items: center;
+
     justify-content: space-between;
 
-    margin-bottom: 15px;
-}
+    margin-bottom: 18px;
 
-.summary-line span {
-    color: #888;
+    color: #999;
 }
 
 .summary-line strong {
@@ -2340,67 +2379,66 @@ body.light-theme .cadastrop textarea::placeholder {
     color: #39FF14 !important;
 }
 
-
-/* DIVISOR */
-
 .summary-divider {
     height: 1px;
+
     margin: 20px 0;
 
-    background: #222;
+    background: #292929;
 }
-
-
-/* TOTAL */
 
 .summary-total {
-    margin-bottom: 25px;
-}
-
-.summary-total span {
     color: #fff;
-    font-weight: bold;
+
+    font-size: 20px;
 }
 
 .summary-total strong {
     color: #39FF14;
-    font-size: 22px;
 }
 
 
-/* BOTÃO FINALIZAR */
+/* ==========================================
+   BOTÃO FINALIZAR
+========================================== */
 
 .checkout-button {
     width: 100%;
-    padding: 13px;
 
-    background: #39FF14;
-    color: #000;
+    padding: 15px;
 
     border: none;
-    border-radius: 5px;
 
-    font-weight: bold;
+    border-radius: 6px;
+
+    background: #39FF14;
+
+    color: #000;
+
+    font-weight: 900;
+
     cursor: pointer;
 }
 
 .checkout-button:hover {
-    background: #2edb10;
+    opacity: 0.85;
 }
 
 
-/* CONTINUAR COMPRANDO */
+/* ==========================================
+   CONTINUAR COMPRANDO
+========================================== */
 
 .continue-shopping {
     display: block;
 
-    margin-top: 15px;
+    margin-top: 18px;
 
-    color: #888;
     text-align: center;
 
-    font-size: 12px;
-    text-decoration: none;
+    color: #888;
+
+    font-size: 13px;
 }
 
 .continue-shopping:hover {
@@ -2408,72 +2446,52 @@ body.light-theme .cadastrop textarea::placeholder {
 }
 
 
-/* ========================= */
-/* TEMA CLARO */
-/* ========================= */
+/* ==========================================
+   CARRINHO VAZIO
+========================================== */
 
-body.light-theme .cart-page {
-    background: #f5f5f5;
+.cart-empty {
+    padding: 60px 20px;
+
+    text-align: center;
+
+    background: #101010;
+
+    border: 1px solid #202020;
+
+    border-radius: 12px;
 }
 
-body.light-theme .cart-header h1 {
-    color: #111;
+.cart-empty h2 {
+    color: #fff;
+
+    margin-bottom: 10px;
 }
 
-body.light-theme .cart-header p {
-    color: #666;
+.cart-empty p {
+    color: #888;
+
+    margin-bottom: 25px;
 }
 
-body.light-theme .cart-item,
-body.light-theme .cart-summary {
-    background: #fff;
-    border-color: #ddd;
-}
+.cart-empty a {
+    display: inline-block;
 
-body.light-theme .cart-item-image {
-    background: #f1f1f1;
-}
+    padding: 12px 20px;
 
-body.light-theme .cart-item-info h2 {
-    color: #111;
-}
+    background: #39FF14;
 
-body.light-theme .cart-item-info p {
-    color: #666;
-}
+    color: #000;
 
-body.light-theme .cart-quantity {
-    border-color: #ddd;
-}
+    border-radius: 6px;
 
-body.light-theme .cart-quantity button {
-    background: #f5f5f5;
-}
-
-body.light-theme .cart-quantity span {
-    color: #111;
-}
-
-body.light-theme .cart-summary h2 {
-    color: #111;
-}
-
-body.light-theme .summary-line strong {
-    color: #222;
-}
-
-body.light-theme .summary-divider {
-    background: #ddd;
-}
-
-body.light-theme .summary-total span {
-    color: #111;
+    font-weight: 800;
 }
 
 
-/* ========================= */
-/* RESPONSIVO */
-/* ========================= */
+/* ==========================================
+   RESPONSIVO
+========================================== */
 
 @media (max-width: 900px) {
 
@@ -2483,15 +2501,15 @@ body.light-theme .summary-total span {
 
     .cart-summary {
         width: 100%;
-        box-sizing: border-box;
     }
+
 }
 
 
 @media (max-width: 600px) {
 
     .cart-page {
-        padding: 60px 5%;
+        padding: 50px 15px;
     }
 
     .cart-header h1 {
@@ -2499,28 +2517,22 @@ body.light-theme .summary-total span {
     }
 
     .cart-item {
-        flex-wrap: wrap;
+        grid-template-columns: 80px 1fr;
     }
 
     .cart-item-image {
-        width: 90px;
-        height: 90px;
-    }
-
-    .cart-item-image img {
-        width: 60px;
-        height: 60px;
-    }
-
-    .cart-item-info {
-        width: calc(100% - 110px);
+        width: 80px;
+        height: 80px;
     }
 
     .cart-item-actions {
-        width: 100%;
+        grid-column: 1 / -1;
+
         flex-direction: row;
+
         justify-content: space-between;
     }
+
 }
 
 /* ==========================================
@@ -2553,4 +2565,67 @@ body.light-theme .summary-total span {
     line-height: 1;
 
     z-index: 9999;
+}
+
+/* ==========================================
+   LOGIN / CADASTRO
+========================================== */
+
+.register-divider {
+
+    width: 100%;
+    max-width: 700px;
+
+    margin: 20px auto 10px;
+
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    color: #777;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    letter-spacing: 2px;
+
+    text-align: center;
+}
+
+
+.register-divider::before,
+.register-divider::after {
+
+    content: "";
+
+    flex: 1;
+
+    height: 1px;
+
+    background: rgba(255, 255, 255, 0.15);
+}
+
+
+.login-message-success {
+
+    color: #39FF14;
+
+}
+
+
+.login-message-error {
+
+    color: #ff4444;
+
+}
+
+
+.form-message {
+
+    margin: 10px 0;
+
+    font-size: 14px;
+
+    text-align: center;
+
 }

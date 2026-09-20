@@ -2,111 +2,257 @@
 <html lang="pt-BR">
 
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Cadastro</title>
+    <title>Login e Cadastro</title>
 
     <link rel="stylesheet" href="../css/style.css">
-    <link rel="icon" type="logo2" href="../imgs/logo2.png">
+
+    <link rel="icon" type="image/png" href="../imgs/logo2.png">
+
 </head>
+
 
 <body>
 
-    <!-- NAVBAR -->
+
+    <!-- ==========================================
+         NAVBAR
+    =========================================== -->
+
     <header>
+
         <nav>
 
-            <!-- LOGO -->
             <a class="logo" href="../index.html">
-                <img src="../imgs/logo2.png" alt="logo" />
+                <img src="../imgs/logo2.png" alt="Dragon Suplementos">
             </a>
 
-            <!-- MENU MOBILE -->
+
             <div class="mobile-menu">
+
                 <div class="line1"></div>
                 <div class="line2"></div>
                 <div class="line3"></div>
+
             </div>
 
-            <!-- MENU -->
+
             <ul class="nav-list">
-                <li>
-                    <a href="../pages/produtos.html" title="Podutos">
+
+                <li id="navProdutos">
+
+                    <a href="../pages/produtos.html" title="Produtos">
+
                         <img src="../imgs/product.svg" alt="Produtos">
+
                     </a>
+
                 </li>
 
 
                 <li>
+
                     <a href="../pages/login-cadastro.html" title="Cadastro">
+
                         <img src="../imgs/person-fill.svg" alt="Cadastro">
+
                     </a>
+
                 </li>
 
-                <li>
+
+                <li id="navCarrinho">
+
                     <a href="../pages/carrinho.html" title="Carrinho">
+
                         <img src="../imgs/cart4.svg" alt="Carrinho">
+
                     </a>
+
                 </li>
+
 
                 <li>
+
                     <a href="../pages/admin.html" title="Admin">
+
                         <img src="../imgs/shield-fill.svg" alt="Admin">
+
                     </a>
+
                 </li>
 
-                <!-- BOTÃO TEMA -->
+
                 <button class="theme-button" id="themeButton" title="Alterar tema">
+
                     <img src="../imgs/mudar tema.svg" alt="Alterar tema">
+
                 </button>
+
             </ul>
 
-
-
-
         </nav>
+
     </header>
 
 
-    <!-- CADASTRO -->
+
+    <!-- ==========================================
+         CONTEÚDO
+    =========================================== -->
+
     <main class="register-page">
+
+
+        <!-- ======================================
+             CABEÇALHO
+        ======================================= -->
 
         <div class="register-header">
 
-            <span>DRAGON SUPLEMENTOS</span>
+            <span>
+                DRAGON SUPLEMENTOS
+            </span>
 
             <h1>
-                CRIE SUA <strong>CONTA</strong>
+                ENTRE NA SUA
+                <strong>CONTA</strong>
             </h1>
 
             <p>
-                Cadastre-se para acompanhar seus pedidos
-                e aproveitar uma experiência completa.
+                Acesse sua conta ou crie um cadastro
+                para aproveitar todos os recursos da loja.
             </p>
 
         </div>
 
 
+
+        <!-- ======================================
+             LOGIN
+        ======================================= -->
+
         <section class="register-container">
+
 
             <div class="register-form-box">
 
+
                 <div class="form-title">
 
-                    <h2>CADASTRO DE CLIENTE</h2>
+                    <h2>
+                        ENTRAR NA CONTA
+                    </h2>
 
                     <p>
-                        Preencha seus dados abaixo.
+                        Use seu e-mail e senha para entrar.
                     </p>
 
                 </div>
+
+
+                <form id="loginForm" novalidate>
+
+
+                    <!-- EMAIL -->
+
+                    <div class="form-group">
+
+                        <label for="loginEmail">
+                            E-mail
+                        </label>
+
+                        <input type="email" id="loginEmail" placeholder="Digite seu e-mail" required>
+
+                    </div>
+
+
+
+                    <!-- SENHA -->
+
+                    <div class="form-group">
+
+                        <label for="loginSenha">
+                            Senha
+                        </label>
+
+                        <input type="password" id="loginSenha" placeholder="Digite sua senha" required>
+
+                    </div>
+
+
+
+                    <!-- MENSAGEM -->
+
+                    <div id="loginMessage" class="form-message"></div>
+
+
+
+                    <!-- BOTÃO -->
+
+                    <button type="submit" class="register-button">
+
+                        ENTRAR
+
+                    </button>
+
+
+                </form>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ======================================
+             DIVISOR
+        ======================================= -->
+
+        <div class="register-divider">
+
+            <span>
+                AINDA NÃO POSSUI UMA CONTA?
+            </span>
+
+        </div>
+
+
+
+        <!-- ======================================
+             CADASTRO
+        ======================================= -->
+
+        <section class="register-container">
+
+
+            <div class="register-form-box">
+
+
+                <div class="form-title">
+
+                    <h2>
+                        CRIAR UMA CONTA
+                    </h2>
+
+                    <p>
+                        Cadastre seus dados para começar.
+                    </p>
+
+                </div>
+
 
 
                 <form id="registerForm" novalidate>
 
 
                     <!-- NOME -->
+
                     <div class="form-group">
 
                         <label for="nome">
@@ -118,7 +264,9 @@
                     </div>
 
 
+
                     <!-- EMAIL -->
+
                     <div class="form-group">
 
                         <label for="email">
@@ -130,7 +278,9 @@
                     </div>
 
 
+
                     <!-- TELEFONE -->
+
                     <div class="form-group">
 
                         <label for="telefone">
@@ -143,7 +293,9 @@
                     </div>
 
 
+
                     <!-- CPF -->
+
                     <div class="form-group">
 
                         <label for="cpf">
@@ -155,7 +307,9 @@
                     </div>
 
 
+
                     <!-- DATA DE NASCIMENTO -->
+
                     <div class="form-group">
 
                         <label for="dataNascimento">
@@ -167,7 +321,9 @@
                     </div>
 
 
+
                     <!-- CATEGORIA -->
+
                     <div class="form-group">
 
                         <label for="categoria">
@@ -193,20 +349,24 @@
                     </div>
 
 
+
                     <!-- SENHA -->
+
                     <div class="form-group">
 
                         <label for="senha">
                             Senha
                         </label>
 
-                        <input type="password" id="senha" name="senha" placeholder="Mínimo de 8 caracteres"
-                            minlength="8" required>
+                        <input type="password" id="senha" name="senha" placeholder="Mínimo de 6 caracteres"
+                            minlength="6" required>
 
                     </div>
 
 
+
                     <!-- CONFIRMAR SENHA -->
+
                     <div class="form-group">
 
                         <label for="confirmarSenha">
@@ -214,30 +374,42 @@
                         </label>
 
                         <input type="password" id="confirmarSenha" name="confirmarSenha"
-                            placeholder="Digite a senha novamente" minlength="8" required>
+                            placeholder="Digite a senha novamente" minlength="6" required>
 
                     </div>
 
 
+
                     <!-- MENSAGEM -->
+
                     <div id="formMessage" class="form-message"></div>
 
 
+
                     <!-- BOTÃO -->
+
                     <button type="submit" class="register-button">
-                        CADASTRAR
+
+                        CRIAR CONTA
+
                     </button>
 
+
                 </form>
+
 
             </div>
 
         </section>
 
+
     </main>
 
 
-    <!-- FOOTER -->
+
+    <!-- ==========================================
+         FOOTER
+    =========================================== -->
 
     <footer class="footer">
 
@@ -250,7 +422,11 @@
 
 
 
+    <!-- JAVASCRIPT -->
+
     <script src="../js/script.js"></script>
+    <script src="../js/login-cadastro.js"></script>
+
 
 </body>
 

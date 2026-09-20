@@ -167,3 +167,87 @@ document.addEventListener(
     "DOMContentLoaded",
     carregarProdutos
 );
+
+// ==========================================
+// ADICIONAR PRODUTO AO CARRINHO
+// ==========================================
+
+async function adicionarAoCarrinho(produtoId) {
+
+    console.log("🛒 Adicionando produto:", produtoId);
+
+    // Usuário temporário
+    // Depois vamos pegar isso do login
+    const usuarioId = 1;
+
+    try {
+
+        const resposta = await fetch(
+            `${API_URL}/api/carrinho/${usuarioId}`,
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+                    produto_id: produtoId,
+                    quantidade: 1
+                })
+            }
+        );
+
+        console.log(
+            "📡 Status adicionar ao carrinho:",
+            resposta.status
+        );
+
+        if (!resposta.ok) {
+
+            const erro =
+                await resposta.json();
+
+            console.error(
+                "❌ Erro da API:",
+                erro
+            );
+
+            throw new Error(
+                "Não foi possível adicionar o produto."
+            );
+        }
+
+        const dados =
+            await resposta.json();
+
+        console.log(
+            "✅ Produto adicionado ao carrinho!",
+            dados
+        );
+
+
+        // ==========================================
+        // CONTADOR DO CARRINHO
+        // ==========================================
+
+        const navCarrinho =
+            document.getElementById("navCarrinho");
+
+        mostrarNotificacaoMaisUm(
+            navCarrinho
+        );
+
+
+    } catch (erro) {
+
+        console.error(
+            "❌ Erro ao adicionar ao carrinho:",
+            erro
+        );
+
+        alert(
+            "Não foi possível adicionar o produto ao carrinho."
+        );
+    }
+}
