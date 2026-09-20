@@ -5,26 +5,15 @@
 
     <meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Admin</title>
 
-    <link
-        rel="stylesheet"
-        href="../css/style.css"
-    >
+    <link rel="stylesheet" href="../css/style.css">
 
-    <link
-        rel="icon"
-        type="image/png"
-        href="../imgs/logo2.png"
-    >
+    <link rel="icon" type="image/png" href="../imgs/logo2.png">
 
     <style>
-
         /* ==========================================
            PRODUTOS CADASTRADOS
         ========================================== */
@@ -114,8 +103,7 @@
 
             padding: 20px;
 
-            border: 1px solid
-                rgba(57, 255, 20, 0.15);
+            border: 1px solid rgba(57, 255, 20, 0.15);
 
             border-radius: 14px;
 
@@ -310,8 +298,7 @@
             color: #ff4d4d;
 
             border:
-                1px solid
-                rgba(255, 77, 77, 0.25) !important;
+                1px solid rgba(255, 77, 77, 0.25) !important;
 
         }
 
@@ -420,7 +407,6 @@
             }
 
         }
-
     </style>
 
 </head>
@@ -437,15 +423,9 @@
 
         <nav>
 
-            <a
-                class="logo"
-                href="../index.html"
-            >
+            <a class="logo" href="../index.html">
 
-                <img
-                    src="../imgs/logo2.png"
-                    alt="Dragon Suplementos"
-                >
+                <img src="../imgs/logo2.png" alt="Dragon Suplementos">
 
             </a>
 
@@ -464,17 +444,36 @@
             <ul class="nav-list">
 
 
+                <li id="navProdutos">
+                    <a href="../pages/produtos.html" title="Produtos">
+                        <img src="../imgs/product.svg" alt="Produtos">
+                    </a>
+                </li>
+
+
                 <li>
 
-                    <a
-                        href="produtos.html"
-                        title="Produtos"
-                    >
+                    <a href="login-cadastro.html" title="Cadastro">
 
-                        <img
-                            src="../imgs/product.svg"
-                            alt="Produtos"
-                        >
+                        <img src="../imgs/person-fill.svg" alt="Cadastro">
+
+                    </a>
+
+                </li>
+
+
+                <li id="navCarrinho">
+                    <a href="../pages/carrinho.html" title="Carrinho">
+                        <img src="../imgs/cart4.svg" alt="Carrinho">
+                    </a>
+                </li>
+
+
+                <li>
+
+                    <a href="admin.html" title="Admin">
+
+                        <img src="../imgs/shield-fill.svg" alt="Admin">
 
                     </a>
 
@@ -483,67 +482,9 @@
 
                 <li>
 
-                    <a
-                        href="login-cadastro.html"
-                        title="Cadastro"
-                    >
+                    <button class="theme-button" id="themeButton" title="Alterar tema">
 
-                        <img
-                            src="../imgs/person-fill.svg"
-                            alt="Cadastro"
-                        >
-
-                    </a>
-
-                </li>
-
-
-                <li>
-
-                    <a
-                        href="carrinho.html"
-                        title="Carrinho"
-                    >
-
-                        <img
-                            src="../imgs/cart4.svg"
-                            alt="Carrinho"
-                        >
-
-                    </a>
-
-                </li>
-
-
-                <li>
-
-                    <a
-                        href="admin.html"
-                        title="Admin"
-                    >
-
-                        <img
-                            src="../imgs/shield-fill.svg"
-                            alt="Admin"
-                        >
-
-                    </a>
-
-                </li>
-
-
-                <li>
-
-                    <button
-                        class="theme-button"
-                        id="themeButton"
-                        title="Alterar tema"
-                    >
-
-                        <img
-                            src="../imgs/mudar tema.svg"
-                            alt="Alterar tema"
-                        >
+                        <img src="../imgs/mudar tema.svg" alt="Alterar tema">
 
                     </button>
 
@@ -757,11 +698,7 @@
                         Nome do Produto:
                     </label>
 
-                    <input
-                        type="text"
-                        id="nome"
-                        required
-                    >
+                    <input type="text" id="nome" required>
 
                 </div>
 
@@ -773,10 +710,7 @@
                         Categoria:
                     </label>
 
-                    <select
-                        id="categoria"
-                        required
-                    >
+                    <select id="categoria" required>
 
                         <option value="">
                             Selecione uma categoria
@@ -810,13 +744,7 @@
                         Preço (R$):
                     </label>
 
-                    <input
-                        type="number"
-                        id="preco"
-                        step="0.01"
-                        min="0.01"
-                        required
-                    >
+                    <input type="number" id="preco" step="0.01" min="0.01" required>
 
                 </div>
 
@@ -828,13 +756,7 @@
                         Estoque:
                     </label>
 
-                    <input
-                        type="number"
-                        id="estoque"
-                        min="0"
-                        step="1"
-                        required
-                    >
+                    <input type="number" id="estoque" min="0" step="1" required>
 
                 </div>
 
@@ -846,11 +768,7 @@
                         Descrição:
                     </label>
 
-                    <textarea
-                        id="descricao"
-                        rows="4"
-                        required
-                    ></textarea>
+                    <textarea id="descricao" rows="4" required></textarea>
 
                 </div>
 
@@ -862,11 +780,7 @@
                         Imagem do Produto:
                     </label>
 
-                    <input
-                        type="file"
-                        id="imagem"
-                        accept="image/*"
-                    >
+                    <input type="file" id="imagem" accept="image/*">
 
                     <small>
                         Ao editar, deixe vazio para manter a imagem atual.
@@ -912,10 +826,7 @@
             </div>
 
 
-            <div
-                class="admin-products-list"
-                id="listaProdutosAdmin"
-            >
+            <div class="admin-products-list" id="listaProdutosAdmin">
 
                 <p class="admin-loading">
                     Carregando produtos...

@@ -444,3 +444,140 @@ document.addEventListener(
 
   }
 );
+
+// ==========================================
+// CONTADOR DE PRODUTOS
+// ==========================================
+
+function mostrarNotificacaoMaisUm(elemento) {
+
+    if (!elemento) {
+        return;
+    }
+
+    if (getComputedStyle(elemento).position === "static") {
+        elemento.style.position = "relative";
+    }
+
+    let notificacao =
+        elemento.querySelector(".nav-notification");
+
+    let quantidade =
+        Number(localStorage.getItem("produtosNovos")) || 0;
+
+    quantidade++;
+
+    localStorage.setItem(
+        "produtosNovos",
+        quantidade
+    );
+
+    if (!notificacao) {
+
+        notificacao =
+            document.createElement("span");
+
+        notificacao.classList.add(
+            "nav-notification"
+        );
+
+        elemento.appendChild(
+            notificacao
+        );
+    }
+
+    notificacao.textContent =
+        quantidade;
+}
+
+
+// ==========================================
+// MOSTRAR CONTADOR AO ABRIR A PÁGINA
+// ==========================================
+
+function atualizarContadorProdutos() {
+
+    const navProdutos =
+        document.getElementById("navProdutos");
+
+    if (!navProdutos) {
+        return;
+    }
+
+    const quantidade =
+        Number(localStorage.getItem("produtosNovos")) || 0;
+
+    if (quantidade <= 0) {
+        return;
+    }
+
+    let notificacao =
+        navProdutos.querySelector(
+            ".nav-notification"
+        );
+
+    if (!notificacao) {
+
+        notificacao =
+            document.createElement("span");
+
+        notificacao.classList.add(
+            "nav-notification"
+        );
+
+        navProdutos.appendChild(
+            notificacao
+        );
+    }
+
+    notificacao.textContent =
+        quantidade;
+}
+
+
+// ==========================================
+// ENTROU NA PÁGINA DE PRODUTOS
+// ==========================================
+
+function zerarContadorProdutos() {
+
+    localStorage.removeItem(
+        "produtosNovos"
+    );
+
+    const navProdutos =
+        document.getElementById("navProdutos");
+
+    if (!navProdutos) {
+        return;
+    }
+
+    const notificacao =
+        navProdutos.querySelector(
+            ".nav-notification"
+        );
+
+    if (notificacao) {
+        notificacao.remove();
+    }
+}
+
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+        atualizarContadorProdutos();
+
+        const paginaAtual =
+            window.location.pathname;
+
+        if (
+            paginaAtual.endsWith(
+                "/produtos.html"
+            )
+        ) {
+            zerarContadorProdutos();
+        }
+
+    }
+);

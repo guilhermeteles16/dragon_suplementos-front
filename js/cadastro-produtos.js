@@ -330,6 +330,13 @@ if (produtoForm) {
                     "✅ Produto cadastrado com sucesso!"
                 );
 
+                const navProdutos =
+                    document.getElementById("navProdutos");
+
+                mostrarNotificacaoMaisUm(
+                    navProdutos
+                );
+
                 limparFormulario();
 
                 await carregarProdutosAdmin();
