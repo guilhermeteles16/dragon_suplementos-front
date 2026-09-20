@@ -3116,3 +3116,64 @@ body.light-theme .checkout-close {
 
 }
 
+
+/* ==========================================
+   ANIMAÇÃO +1
+========================================== */
+
+.animacao-mais-um {
+
+    position: fixed;
+
+    top: 25px;
+
+    right: 25px;
+
+    color: #39FF14;
+
+    font-size: 28px;
+
+    font-weight: 900;
+
+    z-index: 99999;
+
+    pointer-events: none;
+
+    animation: subirMaisUm 1s ease-out forwards;
+
+}
+
+
+@keyframes subirMaisUm {
+
+    0% {
+
+        opacity: 0;
+
+        transform:
+            translateY(20px)
+            scale(0.8);
+
+    }
+
+    20% {
+
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+
+    }
+
+    100% {
+
+        opacity: 0;
+
+        transform:
+            translateY(-45px)
+            scale(1.1);
+
+    }
+
+}
