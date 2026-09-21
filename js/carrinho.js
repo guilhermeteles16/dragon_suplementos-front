@@ -1,8 +1,29 @@
 // ==========================================
-// CONFIGURAÇÃO
+// CONFIGURAÇÃO DO USUÁRIO
 // ==========================================
 
-const USUARIO_ID = 1;
+function obterUsuarioId() {
+
+    const usuarioSalvo =
+        localStorage.getItem("usuarioLogado");
+
+    if (!usuarioSalvo) {
+        return null;
+    }
+
+    try {
+
+        const usuario =
+            JSON.parse(usuarioSalvo);
+
+        return usuario.id || null;
+
+    } catch (erro) {
+
+        return null;
+
+    }
+}
 
 
 // ==========================================
@@ -11,13 +32,14 @@ const USUARIO_ID = 1;
 
 function formatarPreco(valor) {
 
-    return Number(valor).toLocaleString(
+    return Number(valor || 0).toLocaleString(
         "pt-BR",
         {
             style: "currency",
             currency: "BRL"
         }
     );
+
 }
 
 
@@ -34,44 +56,89 @@ async function carregarCarrinho() {
         return;
     }
 
+
+    const usuarioId =
+        obterUsuarioId();
+
+
+    // ==========================================
+    // USUÁRIO NÃO LOGADO
+    // ==========================================
+
+    if (!usuarioId) {
+
+        cartProducts.innerHTML = `
+
+            <div class="cart-empty">
+
+                <h2>
+                    Entre na sua conta.
+                </h2>
+
+                <p>
+                    Faça login para acessar seu carrinho.
+                </p>
+
+                <a href="login-cadastro.html">
+                    ENTRAR NA CONTA
+                </a>
+
+            </div>
+
+        `;
+
+        atualizarResumo([]);
+
+        return;
+
+    }
+
+
     try {
 
-        console.log("🛒 Buscando carrinho...");
-
-        const resposta = await fetch(
-            `${API_URL}/api/carrinho/${USUARIO_ID}`
+        console.log(
+            "🛒 Buscando carrinho do usuário:",
+            usuarioId
         );
+
+
+        const resposta =
+            await fetch(
+                `${API_URL}/api/carrinho/${usuarioId}`
+            );
+
 
         console.log(
             "📡 Status do carrinho:",
             resposta.status
         );
 
+
         if (!resposta.ok) {
 
             throw new Error(
                 "Erro ao buscar carrinho."
             );
+
         }
 
-        // Backend retorna:
-        // {
-        //     itens: [],
-        //     total: 0
-        // }
 
         const dados =
             await resposta.json();
 
+
         const itens =
             dados.itens || [];
+
 
         console.log(
             "🛒 Itens do carrinho:",
             itens
         );
 
+
         cartProducts.innerHTML = "";
+
 
         // ==========================================
         // CARRINHO VAZIO
@@ -80,6 +147,7 @@ async function carregarCarrinho() {
         if (itens.length === 0) {
 
             cartProducts.innerHTML = `
+
                 <div class="cart-empty">
 
                     <h2>
@@ -95,11 +163,14 @@ async function carregarCarrinho() {
                     </a>
 
                 </div>
+
             `;
+
 
             atualizarResumo([]);
 
             return;
+
         }
 
 
@@ -123,16 +194,17 @@ async function carregarCarrinho() {
 
         atualizarResumo(itens);
 
-    }
 
-    catch (erro) {
+    } catch (erro) {
 
         console.error(
             "❌ Erro ao carregar carrinho:",
             erro
         );
 
+
         cartProducts.innerHTML = `
+
             <div class="cart-empty">
 
                 <h2>
@@ -144,8 +216,11 @@ async function carregarCarrinho() {
                 </p>
 
             </div>
+
         `;
+
     }
+
 }
 
 
@@ -161,8 +236,10 @@ function criarItemCarrinho(
     const quantidade =
         Number(item.quantidade) || 1;
 
+
     const preco =
         Number(item.preco) || 0;
+
 
     const subtotal =
         preco * quantidade;
@@ -170,6 +247,7 @@ function criarItemCarrinho(
 
     const article =
         document.createElement("article");
+
 
     article.classList.add(
         "cart-item"
@@ -211,6 +289,7 @@ function criarItemCarrinho(
             <div class="cart-quantity">
 
                 <button
+                    type="button"
                     onclick="alterarQuantidade(
                         ${item.id},
                         ${quantidade - 1}
@@ -226,6 +305,7 @@ function criarItemCarrinho(
 
 
                 <button
+                    type="button"
                     onclick="alterarQuantidade(
                         ${item.id},
                         ${quantidade + 1}
@@ -245,6 +325,7 @@ function criarItemCarrinho(
 
 
             <button
+                type="button"
                 class="remove-item"
                 onclick="removerDoCarrinho(${item.id})"
             >
@@ -259,6 +340,7 @@ function criarItemCarrinho(
     container.appendChild(
         article
     );
+
 }
 
 
@@ -278,6 +360,22 @@ async function alterarQuantidade(
         );
 
         return;
+
+    }
+
+
+    const usuarioId =
+        obterUsuarioId();
+
+
+    if (!usuarioId) {
+
+        alert(
+            "Você precisa entrar na sua conta."
+        );
+
+        return;
+
     }
 
 
@@ -285,7 +383,7 @@ async function alterarQuantidade(
 
         const resposta =
             await fetch(
-                `${API_URL}/api/carrinho/${USUARIO_ID}/${itemId}`,
+                `${API_URL}/api/carrinho/${usuarioId}/${itemId}`,
                 {
                     method: "PUT",
 
@@ -295,33 +393,46 @@ async function alterarQuantidade(
                     },
 
                     body: JSON.stringify({
+
                         quantidade:
                             novaQuantidade
+
                     })
+
                 }
             );
 
 
         if (!resposta.ok) {
 
+            const dados =
+                await resposta.json();
+
             throw new Error(
+                dados.erro ||
                 "Erro ao atualizar quantidade."
             );
+
         }
 
 
         await carregarCarrinho();
 
-    }
 
-    catch (erro) {
+    } catch (erro) {
 
         console.error(
             "❌ Erro ao alterar quantidade:",
             erro
         );
 
+
+        alert(
+            erro.message
+        );
+
     }
+
 }
 
 
@@ -333,11 +444,26 @@ async function removerDoCarrinho(
     itemId
 ) {
 
+    const usuarioId =
+        obterUsuarioId();
+
+
+    if (!usuarioId) {
+
+        alert(
+            "Você precisa entrar na sua conta."
+        );
+
+        return;
+
+    }
+
+
     try {
 
         const resposta =
             await fetch(
-                `${API_URL}/api/carrinho/${USUARIO_ID}/${itemId}`,
+                `${API_URL}/api/carrinho/${usuarioId}/${itemId}`,
                 {
                     method: "DELETE"
                 }
@@ -346,24 +472,34 @@ async function removerDoCarrinho(
 
         if (!resposta.ok) {
 
+            const dados =
+                await resposta.json();
+
             throw new Error(
+                dados.erro ||
                 "Erro ao remover produto."
             );
+
         }
 
 
         await carregarCarrinho();
 
-    }
 
-    catch (erro) {
+    } catch (erro) {
 
         console.error(
             "❌ Erro ao remover produto:",
             erro
         );
 
+
+        alert(
+            erro.message
+        );
+
     }
+
 }
 
 
@@ -383,8 +519,10 @@ function atualizarResumo(
         const preco =
             Number(item.preco) || 0;
 
+
         const quantidade =
             Number(item.quantidade) || 1;
+
 
         subtotal +=
             preco * quantidade;
@@ -396,6 +534,7 @@ function atualizarResumo(
         document.getElementById(
             "cartSubtotal"
         );
+
 
     const elementoTotal =
         document.getElementById(
@@ -422,7 +561,7 @@ function atualizarResumo(
 
 
 // ==========================================
-// INICIAR
+// INICIAR CARRINHO
 // ==========================================
 
 document.addEventListener(
@@ -435,172 +574,388 @@ document.addEventListener(
 // FINALIZAR COMPRA
 // ==========================================
 
-const finalizarCompra = document.getElementById("finalizarCompra");
-const checkoutModal = document.getElementById("checkoutModal");
-const fecharCheckout = document.getElementById("fecharCheckout");
-const confirmarCompra = document.getElementById("confirmarCompra");
-
-const enderecoEntrega = document.getElementById("enderecoEntrega");
-const formaPagamento = document.getElementById("formaPagamento");
-
-const checkoutTotal = document.getElementById("checkoutTotal");
-const checkoutError = document.getElementById("checkoutError");
+const finalizarCompra =
+    document.getElementById(
+        "finalizarCompra"
+    );
 
 
+const checkoutModal =
+    document.getElementById(
+        "checkoutModal"
+    );
+
+
+const fecharCheckout =
+    document.getElementById(
+        "fecharCheckout"
+    );
+
+
+const confirmarCompra =
+    document.getElementById(
+        "confirmarCompra"
+    );
+
+
+const enderecoEntrega =
+    document.getElementById(
+        "enderecoEntrega"
+    );
+
+
+const formaPagamento =
+    document.getElementById(
+        "formaPagamento"
+    );
+
+
+const checkoutTotal =
+    document.getElementById(
+        "checkoutTotal"
+    );
+
+
+const checkoutError =
+    document.getElementById(
+        "checkoutError"
+    );
+
+
+// ==========================================
 // ABRIR FINALIZAÇÃO
+// ==========================================
 
 if (finalizarCompra) {
 
-    finalizarCompra.addEventListener("click", () => {
+    finalizarCompra.addEventListener(
+        "click",
+        async () => {
 
-        const total = document.getElementById("cartTotal");
+            const usuarioId =
+                obterUsuarioId();
 
-        // Não permite finalizar carrinho vazio
-        if (!total || total.textContent === "R$ 0,00") {
 
-            alert(
-                "Adicione algum produto ao carrinho antes de finalizar a compra."
-            );
+            // ==================================
+            // USUÁRIO NÃO LOGADO
+            // ==================================
 
-            return;
+            if (!usuarioId) {
+
+                alert(
+                    "Você precisa entrar na sua conta para finalizar a compra."
+                );
+
+
+                window.location.href =
+                    "login-cadastro.html";
+
+
+                return;
+
+            }
+
+
+            try {
+
+                // ==================================
+                // BUSCAR CARRINHO ATUALIZADO
+                // ==================================
+
+                const resposta =
+                    await fetch(
+                        `${API_URL}/api/carrinho/${usuarioId}`
+                    );
+
+
+                if (!resposta.ok) {
+
+                    throw new Error(
+                        "Não foi possível verificar o carrinho."
+                    );
+
+                }
+
+
+                const dados =
+                    await resposta.json();
+
+
+                const itens =
+                    dados.itens || [];
+
+
+                // ==================================
+                // CARRINHO VAZIO
+                // ==================================
+
+                if (itens.length === 0) {
+
+                    alert(
+                        "Adicione algum produto ao carrinho antes de finalizar a compra."
+                    );
+
+
+                    return;
+
+                }
+
+
+                // ==================================
+                // CARRINHO COM PRODUTOS
+                // ==================================
+
+                checkoutTotal.textContent =
+                    formatarPreco(
+                        dados.total || 0
+                    );
+
+
+                checkoutError.textContent =
+                    "";
+
+
+                checkoutModal.classList.add(
+                    "active"
+                );
+
+
+            } catch (erro) {
+
+                console.error(
+                    "❌ Erro ao verificar carrinho:",
+                    erro
+                );
+
+
+                alert(
+                    "Não foi possível verificar seu carrinho."
+                );
+
+            }
+
         }
-
-        // Mostra o total no modal
-        checkoutTotal.textContent = total.textContent;
-
-        checkoutError.textContent = "";
-
-        checkoutModal.classList.add("active");
-
-    });
+    );
 
 }
 
 
+// ==========================================
 // FECHAR MODAL
+// ==========================================
 
 if (fecharCheckout) {
 
-    fecharCheckout.addEventListener("click", () => {
+    fecharCheckout.addEventListener(
+        "click",
+        () => {
 
-        checkoutModal.classList.remove("active");
+            checkoutModal.classList.remove(
+                "active"
+            );
 
-    });
+        }
+    );
 
 }
 
 
+// ==========================================
 // FECHAR CLICANDO FORA
+// ==========================================
 
 if (checkoutModal) {
 
-    checkoutModal.addEventListener("click", (evento) => {
+    checkoutModal.addEventListener(
+        "click",
+        (evento) => {
 
-        if (evento.target === checkoutModal) {
+            if (
+                evento.target ===
+                checkoutModal
+            ) {
 
-            checkoutModal.classList.remove("active");
+                checkoutModal.classList.remove(
+                    "active"
+                );
+
+            }
 
         }
-
-    });
+    );
 
 }
 
 
+// ==========================================
 // CONFIRMAR PEDIDO
+// ==========================================
 
 if (confirmarCompra) {
 
-    confirmarCompra.addEventListener("click", async () => {
+    confirmarCompra.addEventListener(
+        "click",
+        async () => {
 
-        const endereco = enderecoEntrega.value.trim();
-        const pagamento = formaPagamento.value;
-
-        checkoutError.textContent = "";
+            const endereco =
+                enderecoEntrega.value.trim();
 
 
-        // Validar endereço
+            const pagamento =
+                formaPagamento.value;
 
-        if (!endereco) {
 
             checkoutError.textContent =
-                "Digite o endereço de entrega.";
+                "";
 
-            enderecoEntrega.focus();
 
-            return;
+            // ==================================
+            // VALIDAR ENDEREÇO
+            // ==================================
+
+            if (!endereco) {
+
+                checkoutError.textContent =
+                    "Digite o endereço de entrega.";
+
+
+                enderecoEntrega.focus();
+
+
+                return;
+
+            }
+
+
+            // ==================================
+            // VALIDAR PAGAMENTO
+            // ==================================
+
+            if (!pagamento) {
+
+                checkoutError.textContent =
+                    "Selecione uma forma de pagamento.";
+
+
+                formaPagamento.focus();
+
+
+                return;
+
+            }
+
+
+            // ==================================
+            // PROCESSANDO
+            // ==================================
+
+            confirmarCompra.disabled =
+                true;
+
+
+            confirmarCompra.textContent =
+                "PROCESSANDO...";
+
+
+            // ==================================
+            // SIMULAÇÃO
+            // ==================================
+
+            await new Promise(
+                resolve => {
+
+                    setTimeout(
+                        resolve,
+                        1500
+                    );
+
+                }
+            );
+
+
+            // ==================================
+            // NÚMERO FICTÍCIO DO PEDIDO
+            // ==================================
+
+            const numeroPedido =
+                Math.floor(
+                    100000 +
+                    Math.random() *
+                    900000
+                );
+
+
+            const formasPagamento = {
+
+                pix:
+                    "PIX",
+
+                cartao:
+                    "Cartão",
+
+                boleto:
+                    "Boleto"
+
+            };
+
+
+            // ==================================
+            // FECHAR MODAL
+            // ==================================
+
+            checkoutModal.classList.remove(
+                "active"
+            );
+
+
+            // ==================================
+            // MENSAGEM DE SUCESSO
+            // ==================================
+
+            alert(
+
+                "PEDIDO REALIZADO COM SUCESSO!\n\n" +
+
+                "Pedido nº " +
+                numeroPedido +
+
+                "\n" +
+
+                "Pagamento: " +
+
+                formasPagamento[pagamento] +
+
+                "\n\n" +
+
+                "Obrigado por comprar na Dragon Suplementos!"
+
+            );
+
+
+            // ==================================
+            // LIMPAR CAMPOS
+            // ==================================
+
+            enderecoEntrega.value =
+                "";
+
+
+            formaPagamento.value =
+                "";
+
+
+            // ==================================
+            // RESTAURAR BOTÃO
+            // ==================================
+
+            confirmarCompra.disabled =
+                false;
+
+
+            confirmarCompra.textContent =
+                "CONFIRMAR PEDIDO";
+
         }
-
-
-        // Validar pagamento
-
-        if (!pagamento) {
-
-            checkoutError.textContent =
-                "Selecione uma forma de pagamento.";
-
-            formaPagamento.focus();
-
-            return;
-        }
-
-
-        // Processando
-
-        confirmarCompra.disabled = true;
-
-        confirmarCompra.textContent = "PROCESSANDO...";
-
-
-        // Simulação
-
-        await new Promise(resolve => {
-            setTimeout(resolve, 1500);
-        });
-
-
-        // Número fictício do pedido
-
-        const numeroPedido =
-            Math.floor(100000 + Math.random() * 900000);
-
-
-        const formasPagamento = {
-            pix: "PIX",
-            cartao: "Cartão",
-            boleto: "Boleto"
-        };
-
-
-        // Fechar modal
-
-        checkoutModal.classList.remove("active");
-
-
-        // Mensagem de sucesso
-
-        alert(
-            "PEDIDO REALIZADO COM SUCESSO!\n\n" +
-            "Pedido nº " + numeroPedido + "\n" +
-            "Pagamento: " +
-            formasPagamento[pagamento] +
-            "\n\n" +
-            "Obrigado por comprar na Dragon Suplementos!"
-        );
-
-
-        // Limpar campos
-
-        enderecoEntrega.value = "";
-        formaPagamento.value = "";
-
-
-        // Restaurar botão
-
-        confirmarCompra.disabled = false;
-
-        confirmarCompra.textContent = "CONFIRMAR PEDIDO";
-
-    });
+    );
 
 }
