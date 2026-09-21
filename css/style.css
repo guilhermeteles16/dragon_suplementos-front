@@ -3177,3 +3177,163 @@ body.light-theme .checkout-close {
     }
 
 }
+
+
+/* ==========================================
+   ANIMAÇÃO DE BOAS-VINDAS
+========================================== */
+
+.welcome-overlay {
+
+    position: fixed;
+
+    inset: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: rgba(0, 0, 0, 0.85);
+
+    z-index: 99999;
+
+    animation:
+        welcomeFadeIn 0.3s ease;
+
+}
+
+
+.welcome-box {
+
+    width: min(90%, 400px);
+
+    padding: 35px 25px;
+
+    text-align: center;
+
+    background: #101010;
+
+    border: 1px solid #39FF14;
+
+    border-radius: 15px;
+
+    box-shadow:
+        0 0 30px rgba(57, 255, 20, 0.25);
+
+    animation:
+        welcomeScale 0.4s ease;
+
+}
+
+
+.welcome-icon {
+
+    width: 60px;
+
+    height: 60px;
+
+    margin: 0 auto 15px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #39FF14;
+
+    color: #050505;
+
+    font-size: 32px;
+
+    font-weight: bold;
+
+}
+
+
+.welcome-box h2 {
+
+    margin: 0 0 10px;
+
+    color: #fff;
+
+    font-size: 28px;
+
+}
+
+
+.welcome-box p {
+
+    margin: 0 0 8px;
+
+    color: #ccc;
+
+    font-size: 17px;
+
+}
+
+
+.welcome-box p strong {
+
+    color: #39FF14;
+
+}
+
+
+.welcome-box span {
+
+    color: #888;
+
+    font-size: 14px;
+
+}
+
+
+.welcome-hidden {
+
+    opacity: 0;
+
+    transition: opacity 0.4s ease;
+
+}
+
+
+@keyframes welcomeFadeIn {
+
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+
+}
+
+
+@keyframes welcomeScale {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            scale(0.85);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            scale(1);
+
+    }
+
+}
+

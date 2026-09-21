@@ -1,6 +1,6 @@
+
 // ==========================================
 // LOGIN E CADASTRO
-// DRAGON SUPLEMENTOS
 // ==========================================
 
 
@@ -14,61 +14,131 @@ const loginForm =
 const registerForm =
     document.getElementById("registerForm");
 
+const loginMessage =
+    document.getElementById("loginMessage");
+
+const registerMessage =
+    document.getElementById("formMessage");
+
 
 // ==========================================
-// FUNÇÕES DE MENSAGEM
+// FUNÇÕES AUXILIARES
 // ==========================================
 
-function mostrarMensagem(elemento, mensagem, tipo) {
+function mostrarMensagem(
+    elemento,
+    mensagem,
+    tipo
+) {
 
     if (!elemento) {
         return;
     }
 
-    elemento.textContent = mensagem;
+    elemento.textContent =
+        mensagem;
 
-    if (tipo === "erro") {
-        elemento.style.color = "#ff4444";
-    }
+    elemento.className =
+        "form-message";
 
     if (tipo === "sucesso") {
-        elemento.style.color = "#39FF14";
-    }
 
-    if (tipo === "info") {
-        elemento.style.color = "#aaa";
+        elemento.classList.add(
+            "success"
+        );
+
+    } else {
+
+        elemento.classList.add(
+            "error"
+        );
     }
 }
 
 
-// ==========================================
-// FUNÇÃO PARA DESTACAR CAMPO COM ERRO
-// ==========================================
+function limparErro(input) {
 
-function marcarErro(campo) {
-
-    if (!campo) {
+    if (!input) {
         return;
     }
 
-    campo.style.border = "1px solid #ff4444";
-    campo.style.boxShadow =
-        "0 0 8px rgba(255, 68, 68, 0.25)";
+    input.classList.remove(
+        "input-error"
+    );
+}
+
+
+function marcarErro(input) {
+
+    if (!input) {
+        return;
+    }
+
+    input.classList.add(
+        "input-error"
+    );
 }
 
 
 // ==========================================
-// FUNÇÃO PARA LIMPAR ERRO DO CAMPO
+// ANIMAÇÃO DE BOAS-VINDAS
 // ==========================================
 
-function limparErro(campo) {
+function mostrarBoasVindas(nome) {
 
-    if (!campo) {
-        return;
-    }
+    const overlay =
+        document.createElement("div");
 
-    campo.style.border = "";
-    campo.style.boxShadow = "";
+    overlay.className =
+        "welcome-overlay";
+
+    overlay.innerHTML = `
+        <div class="welcome-box">
+
+            <div class="welcome-icon">
+                ✓
+            </div>
+
+            <h2>
+                Bem-vindo!
+            </h2>
+
+            <p>
+                Olá, <strong>${nome}</strong>!
+            </p>
+
+            <span>
+                Login realizado com sucesso.
+            </span>
+
+        </div>
+    `;
+
+    document.body.appendChild(
+        overlay
+    );
+
+
+    setTimeout(
+        function () {
+
+            overlay.classList.add(
+                "welcome-hidden"
+            );
+
+
+            setTimeout(
+                function () {
+
+                    overlay.remove();
+
+                },
+                400
+            );
+
+        },
+        1600
+    );
 }
 
 
@@ -78,118 +148,129 @@ function limparErro(campo) {
 
 if (loginForm) {
 
-    console.log("✅ Login encontrado!");
-
     loginForm.addEventListener(
         "submit",
         async function (event) {
 
             event.preventDefault();
 
-            console.log("🟢 FORMULÁRIO DE LOGIN ENVIADO!");
+
+            // ==================================
+            // CAMPOS
+            // ==================================
+
+            const emailInput =
+                document.getElementById(
+                    "loginEmail"
+                );
+
+            const senhaInput =
+                document.getElementById(
+                    "loginSenha"
+                );
+
 
             const email =
-                document
-                    .getElementById("loginEmail")
-                    .value
-                    .trim();
+                emailInput.value.trim();
 
             const senha =
-                document
-                    .getElementById("loginSenha")
-                    .value;
-
-            const campoEmail =
-                document.getElementById("loginEmail");
-
-            const campoSenha =
-                document.getElementById("loginSenha");
-
-            const mensagem =
-                document.getElementById("loginMessage");
+                senhaInput.value;
 
 
-            // Limpa erros anteriores
+            limparErro(
+                emailInput
+            );
 
-            limparErro(campoEmail);
-            limparErro(campoSenha);
+            limparErro(
+                senhaInput
+            );
 
 
-            // ==========================================
-            // VALIDAÇÃO DO E-MAIL
-            // ==========================================
+            // ==================================
+            // LIMPAR MENSAGEM
+            // ==================================
+
+            mostrarMensagem(
+                loginMessage,
+                "",
+                "erro"
+            );
+
+
+            // ==================================
+            // VALIDAÇÕES
+            // ==================================
 
             if (!email) {
 
-                marcarErro(campoEmail);
+                marcarErro(
+                    emailInput
+                );
 
                 mostrarMensagem(
-                    mensagem,
+                    loginMessage,
                     "Digite seu e-mail.",
                     "erro"
                 );
 
-                campoEmail.focus();
+                emailInput.focus();
 
                 return;
             }
 
-
-            // ==========================================
-            // VALIDAÇÃO DO FORMATO DO E-MAIL
-            // ==========================================
 
             const emailValido =
                 /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+
             if (!emailValido.test(email)) {
 
-                marcarErro(campoEmail);
+                marcarErro(
+                    emailInput
+                );
 
                 mostrarMensagem(
-                    mensagem,
+                    loginMessage,
                     "Digite um e-mail válido.",
                     "erro"
                 );
 
-                campoEmail.focus();
+                emailInput.focus();
 
                 return;
             }
 
 
-            // ==========================================
-            // VALIDAÇÃO DA SENHA
-            // ==========================================
-
             if (!senha) {
 
-                marcarErro(campoSenha);
+                marcarErro(
+                    senhaInput
+                );
 
                 mostrarMensagem(
-                    mensagem,
+                    loginMessage,
                     "Digite sua senha.",
                     "erro"
                 );
 
-                campoSenha.focus();
+                senhaInput.focus();
 
                 return;
             }
 
 
-            // ==========================================
-            // ENVIANDO
-            // ==========================================
-
-            mostrarMensagem(
-                mensagem,
-                "Entrando...",
-                "info"
-            );
-
+            // ==================================
+            // LOGIN NA API
+            // ==================================
 
             try {
+
+                mostrarMensagem(
+                    loginMessage,
+                    "Entrando...",
+                    "sucesso"
+                );
+
 
                 const resposta =
                     await fetch(
@@ -202,10 +283,11 @@ if (loginForm) {
                                     "application/json"
                             },
 
-                            body: JSON.stringify({
-                                email: email,
-                                senha: senha
-                            })
+                            body:
+                                JSON.stringify({
+                                    email: email,
+                                    senha: senha
+                                })
                         }
                     );
 
@@ -214,37 +296,53 @@ if (loginForm) {
                     await resposta.json();
 
 
-                // ==========================================
-                // ERRO DO BACKEND
-                // ==========================================
+                console.log(
+                    "📡 Resposta do login:",
+                    dados
+                );
+
+
+                // ==================================
+                // ERRO
+                // ==================================
 
                 if (!resposta.ok) {
 
-                    mostrarMensagem(
-                        mensagem,
+                    throw new Error(
                         dados.erro ||
-                        "E-mail ou senha inválidos.",
-                        "erro"
+                        "E-mail ou senha inválidos."
                     );
-
-                    marcarErro(campoEmail);
-                    marcarErro(campoSenha);
-
-                    return;
                 }
 
 
-                // ==========================================
-                // LOGIN REALIZADO
-                // ==========================================
+                // ==================================
+                // USUÁRIO
+                // ==================================
 
                 const usuario =
                     dados.usuario;
 
 
+                if (
+                    !usuario ||
+                    !usuario.id
+                ) {
+
+                    throw new Error(
+                        "A API não retornou os dados do usuário."
+                    );
+                }
+
+
+                // ==================================
+                // SALVAR USUÁRIO
+                // ==================================
+
                 localStorage.setItem(
                     "usuarioLogado",
-                    JSON.stringify(usuario)
+                    JSON.stringify(
+                        usuario
+                    )
                 );
 
 
@@ -254,16 +352,18 @@ if (loginForm) {
                 );
 
 
-                mostrarMensagem(
-                    mensagem,
-                    `Bem-vindo, ${usuario.nome}!`,
-                    "sucesso"
+                // ==================================
+                // MOSTRAR BOAS-VINDAS
+                // ==================================
+
+                mostrarBoasVindas(
+                    usuario.nome
                 );
 
 
-                // ==========================================
-                // REDIRECIONA PARA PRODUTOS
-                // ==========================================
+                // ==================================
+                // IR PARA PRODUTOS
+                // ==================================
 
                 setTimeout(
                     function () {
@@ -272,7 +372,7 @@ if (loginForm) {
                             "produtos.html";
 
                     },
-                    800
+                    2000
                 );
 
 
@@ -283,15 +383,18 @@ if (loginForm) {
                     erro
                 );
 
+
                 mostrarMensagem(
-                    mensagem,
-                    "Não foi possível conectar ao servidor.",
+                    loginMessage,
+                    erro.message ||
+                    "Não foi possível realizar o login.",
                     "erro"
                 );
             }
 
         }
     );
+
 }
 
 
@@ -301,375 +404,303 @@ if (loginForm) {
 
 if (registerForm) {
 
-    console.log("✅ Cadastro encontrado!");
-
     registerForm.addEventListener(
         "submit",
         async function (event) {
 
             event.preventDefault();
 
-            console.log(
-                "🟢 FORMULÁRIO DE CADASTRO ENVIADO!"
-            );
 
-
-            // ==========================================
-            // PEGAR VALORES
-            // ==========================================
-
-            const nome =
-                document
-                    .getElementById("nome")
-                    .value
-                    .trim();
-
-            const email =
-                document
-                    .getElementById("email")
-                    .value
-                    .trim();
-
-            const telefone =
-                document
-                    .getElementById("telefone")
-                    .value
-                    .trim();
-
-            const cpf =
-                document
-                    .getElementById("cpf")
-                    .value
-                    .trim();
-
-            const dataNascimento =
-                document
-                    .getElementById("dataNascimento")
-                    .value;
-
-            const categoria =
-                document
-                    .getElementById("categoria")
-                    .value;
-
-            const senha =
-                document
-                    .getElementById("senha")
-                    .value;
-
-            const confirmarSenha =
-                document
-                    .getElementById("confirmarSenha")
-                    .value;
-
-
-            // ==========================================
+            // ==================================
             // CAMPOS
-            // ==========================================
+            // ==================================
 
-            const campoNome =
-                document.getElementById("nome");
+            const nomeInput =
+                document.getElementById(
+                    "nome"
+                );
 
-            const campoEmail =
-                document.getElementById("email");
+            const emailInput =
+                document.getElementById(
+                    "email"
+                );
 
-            const campoTelefone =
-                document.getElementById("telefone");
+            const telefoneInput =
+                document.getElementById(
+                    "telefone"
+                );
 
-            const campoCpf =
-                document.getElementById("cpf");
+            const cpfInput =
+                document.getElementById(
+                    "cpf"
+                );
 
-            const campoData =
+            const dataNascimentoInput =
                 document.getElementById(
                     "dataNascimento"
                 );
 
-            const campoCategoria =
+            const categoriaInput =
                 document.getElementById(
                     "categoria"
                 );
 
-            const campoSenha =
-                document.getElementById("senha");
+            const senhaInput =
+                document.getElementById(
+                    "senha"
+                );
 
-            const campoConfirmarSenha =
+            const confirmarSenhaInput =
                 document.getElementById(
                     "confirmarSenha"
                 );
 
-            const mensagem =
-                document.getElementById(
-                    "formMessage"
-                );
+
+            // ==================================
+            // VALORES
+            // ==================================
+
+            const nome =
+                nomeInput.value.trim();
+
+            const email =
+                emailInput.value.trim();
+
+            const telefone =
+                telefoneInput.value.trim();
+
+            const cpf =
+                cpfInput.value.trim();
+
+            const dataNascimento =
+                dataNascimentoInput.value;
+
+            const categoria =
+                categoriaInput.value;
+
+            const senha =
+                senhaInput.value;
+
+            const confirmarSenha =
+                confirmarSenhaInput.value;
 
 
-            // ==========================================
+            // ==================================
             // LIMPAR ERROS
-            // ==========================================
+            // ==================================
 
             [
-                campoNome,
-                campoEmail,
-                campoTelefone,
-                campoCpf,
-                campoData,
-                campoCategoria,
-                campoSenha,
-                campoConfirmarSenha
-            ].forEach(limparErro);
+                nomeInput,
+                emailInput,
+                telefoneInput,
+                cpfInput,
+                dataNascimentoInput,
+                categoriaInput,
+                senhaInput,
+                confirmarSenhaInput
+            ].forEach(
+                limparErro
+            );
 
 
-            // ==========================================
-            // NOME
-            // ==========================================
+            mostrarMensagem(
+                registerMessage,
+                "",
+                "erro"
+            );
+
+
+            // ==================================
+            // VALIDAÇÕES
+            // ==================================
 
             if (!nome) {
 
-                marcarErro(campoNome);
+                marcarErro(
+                    nomeInput
+                );
 
                 mostrarMensagem(
-                    mensagem,
+                    registerMessage,
                     "Digite seu nome.",
                     "erro"
                 );
 
-                campoNome.focus();
+                nomeInput.focus();
 
                 return;
             }
 
 
-            // ==========================================
-            // E-MAIL
-            // ==========================================
-
             if (!email) {
 
-                marcarErro(campoEmail);
+                marcarErro(
+                    emailInput
+                );
 
                 mostrarMensagem(
-                    mensagem,
+                    registerMessage,
                     "Digite seu e-mail.",
                     "erro"
                 );
 
-                campoEmail.focus();
+                emailInput.focus();
 
                 return;
             }
 
-
-            // ==========================================
-            // FORMATO DO E-MAIL
-            // ==========================================
 
             const emailValido =
                 /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-            if (!emailValido.test(email)) {
 
-                marcarErro(campoEmail);
+            if (
+                !emailValido.test(
+                    email
+                )
+            ) {
+
+                marcarErro(
+                    emailInput
+                );
 
                 mostrarMensagem(
-                    mensagem,
+                    registerMessage,
                     "Digite um e-mail válido.",
                     "erro"
                 );
 
-                campoEmail.focus();
+                emailInput.focus();
 
                 return;
             }
 
 
-            // ==========================================
-            // TELEFONE
-            // ==========================================
-
             if (!telefone) {
 
-                marcarErro(campoTelefone);
+                marcarErro(
+                    telefoneInput
+                );
 
                 mostrarMensagem(
-                    mensagem,
+                    registerMessage,
                     "Digite seu telefone.",
                     "erro"
                 );
 
-                campoTelefone.focus();
+                telefoneInput.focus();
 
                 return;
             }
 
 
-            // ==========================================
-            // CPF
-            // ==========================================
-
             if (!cpf) {
 
-                marcarErro(campoCpf);
+                marcarErro(
+                    cpfInput
+                );
 
                 mostrarMensagem(
-                    mensagem,
+                    registerMessage,
                     "Digite seu CPF.",
                     "erro"
                 );
 
-                campoCpf.focus();
+                cpfInput.focus();
 
                 return;
             }
 
-
-            // ==========================================
-            // VALIDAÇÃO SIMPLES DO CPF
-            // ==========================================
-
-            const cpfNumeros =
-                cpf.replace(/\D/g, "");
-
-            if (cpfNumeros.length !== 11) {
-
-                marcarErro(campoCpf);
-
-                mostrarMensagem(
-                    mensagem,
-                    "Digite um CPF válido.",
-                    "erro"
-                );
-
-                campoCpf.focus();
-
-                return;
-            }
-
-
-            // ==========================================
-            // DATA DE NASCIMENTO
-            // ==========================================
 
             if (!dataNascimento) {
 
-                marcarErro(campoData);
+                marcarErro(
+                    dataNascimentoInput
+                );
 
                 mostrarMensagem(
-                    mensagem,
+                    registerMessage,
                     "Informe sua data de nascimento.",
                     "erro"
                 );
 
-                campoData.focus();
+                dataNascimentoInput.focus();
 
                 return;
             }
 
 
-            // ==========================================
-            // CATEGORIA
-            // ==========================================
-
             if (!categoria) {
 
-                marcarErro(campoCategoria);
+                marcarErro(
+                    categoriaInput
+                );
 
                 mostrarMensagem(
-                    mensagem,
+                    registerMessage,
                     "Selecione uma categoria.",
                     "erro"
                 );
 
-                campoCategoria.focus();
+                categoriaInput.focus();
 
                 return;
             }
 
 
-            // ==========================================
-            // SENHA
-            // ==========================================
+            if (
+                senha.length < 6
+            ) {
 
-            if (!senha) {
-
-                marcarErro(campoSenha);
+                marcarErro(
+                    senhaInput
+                );
 
                 mostrarMensagem(
-                    mensagem,
-                    "Digite uma senha.",
+                    registerMessage,
+                    "A senha deve ter pelo menos 6 caracteres.",
                     "erro"
                 );
 
-                campoSenha.focus();
+                senhaInput.focus();
 
                 return;
             }
 
 
-            if (senha.length < 6) {
+            if (
+                senha !==
+                confirmarSenha
+            ) {
 
-                marcarErro(campoSenha);
-
-                mostrarMensagem(
-                    mensagem,
-                    "A senha deve ter no mínimo 6 caracteres.",
-                    "erro"
+                marcarErro(
+                    confirmarSenhaInput
                 );
 
-                campoSenha.focus();
-
-                return;
-            }
-
-
-            // ==========================================
-            // CONFIRMAR SENHA
-            // ==========================================
-
-            if (!confirmarSenha) {
-
-                marcarErro(campoConfirmarSenha);
-
                 mostrarMensagem(
-                    mensagem,
-                    "Confirme sua senha.",
-                    "erro"
-                );
-
-                campoConfirmarSenha.focus();
-
-                return;
-            }
-
-
-            if (senha !== confirmarSenha) {
-
-                marcarErro(campoSenha);
-                marcarErro(campoConfirmarSenha);
-
-                mostrarMensagem(
-                    mensagem,
+                    registerMessage,
                     "As senhas não são iguais.",
                     "erro"
                 );
 
-                campoConfirmarSenha.focus();
+                confirmarSenhaInput.focus();
 
                 return;
             }
 
 
-            // ==========================================
-            // ENVIANDO CADASTRO
-            // ==========================================
-
-            mostrarMensagem(
-                mensagem,
-                "Criando sua conta...",
-                "info"
-            );
-
+            // ==================================
+            // CADASTRAR NA API
+            // ==================================
 
             try {
+
+                mostrarMensagem(
+                    registerMessage,
+                    "Criando sua conta...",
+                    "sucesso"
+                );
+
 
                 const resposta =
                     await fetch(
@@ -682,24 +713,31 @@ if (registerForm) {
                                     "application/json"
                             },
 
-                            body: JSON.stringify({
+                            body:
+                                JSON.stringify({
 
-                                nome: nome,
+                                    nome:
+                                        nome,
 
-                                email: email,
+                                    email:
+                                        email,
 
-                                telefone: telefone,
+                                    telefone:
+                                        telefone,
 
-                                cpf: cpf,
+                                    cpf:
+                                        cpf,
 
-                                data_nascimento:
-                                    dataNascimento,
+                                    data_nascimento:
+                                        dataNascimento,
 
-                                categoria: categoria,
+                                    categoria:
+                                        categoria,
 
-                                senha: senha
+                                    senha:
+                                        senha
 
-                            })
+                                })
                         }
                     );
 
@@ -714,70 +752,53 @@ if (registerForm) {
                 );
 
 
-                // ==========================================
+                // ==================================
                 // ERRO
-                // ==========================================
+                // ==================================
 
                 if (!resposta.ok) {
 
-                    mostrarMensagem(
-                        mensagem,
+                    throw new Error(
                         dados.erro ||
-                        "Não foi possível criar a conta.",
-                        "erro"
+                        "Não foi possível criar a conta."
                     );
-
-                    return;
                 }
 
 
-                // ==========================================
-                // CONTA CRIADA
-                // ==========================================
-
-                console.log(
-                    "✅ Conta criada:",
-                    dados
-                );
-
-
-                /*
-                    O backend retorna o usuário
-                    recém-cadastrado.
-                */
-
-                localStorage.setItem(
-                    "usuarioLogado",
-                    JSON.stringify(dados)
-                );
-
+                // ==================================
+                // SUCESSO
+                // ==================================
 
                 mostrarMensagem(
-                    mensagem,
-                    "Conta criada com sucesso!",
+                    registerMessage,
+                    "Conta criada com sucesso! Agora faça login.",
                     "sucesso"
                 );
 
 
-                // ==========================================
-                // LIMPA FORMULÁRIO
-                // ==========================================
-
                 registerForm.reset();
 
 
-                // ==========================================
-                // VAI PARA PRODUTOS
-                // ==========================================
+                // ==================================
+                // FOCO NO LOGIN
+                // ==================================
 
                 setTimeout(
                     function () {
 
-                        window.location.href =
-                            "produtos.html";
+                        const loginEmail =
+                            document.getElementById(
+                                "loginEmail"
+                            );
+
+                        if (loginEmail) {
+
+                            loginEmail.focus();
+
+                        }
 
                     },
-                    1000
+                    300
                 );
 
 
@@ -788,36 +809,42 @@ if (registerForm) {
                     erro
                 );
 
+
                 mostrarMensagem(
-                    mensagem,
-                    "Não foi possível conectar ao servidor.",
+                    registerMessage,
+                    erro.message ||
+                    "Não foi possível criar a conta.",
                     "erro"
                 );
             }
 
         }
     );
+
 }
 
 
 // ==========================================
-// LIMPAR ERRO AO DIGITAR
+// LIMPAR ERROS AO DIGITAR
 // ==========================================
 
-const camposFormulario =
+const campos =
     document.querySelectorAll(
-        "#loginForm input, #registerForm input, #registerForm select"
+        "input, select"
     );
 
 
-camposFormulario.forEach(
+campos.forEach(
     function (campo) {
 
         campo.addEventListener(
             "input",
             function () {
 
-                limparErro(campo);
+                limparErro(
+                    campo
+                );
+
             }
         );
 
@@ -826,56 +853,12 @@ camposFormulario.forEach(
             "change",
             function () {
 
-                limparErro(campo);
+                limparErro(
+                    campo
+                );
+
             }
         );
 
     }
 );
-
-
-// ==========================================
-// LOGIN REALIZADO
-// ==========================================
-
-const usuario =
-    dados.usuario;
-
-
-localStorage.setItem(
-    "usuarioLogado",
-    JSON.stringify(usuario)
-);
-
-
-console.log(
-    "✅ Usuário logado:",
-    usuario
-);
-
-
-// ==========================================
-// MENSAGEM DE BOAS-VINDAS
-// ==========================================
-
-mostrarMensagem(
-    mensagem,
-    `Login realizado com sucesso! Bem-vindo, ${usuario.nome}!`,
-    "sucesso"
-);
-
-
-// ==========================================
-// REDIRECIONA PARA PRODUTOS
-// ==========================================
-
-setTimeout(
-    function () {
-
-        window.location.href =
-            "produtos.html";
-
-    },
-    2000
-);
-
