@@ -3449,3 +3449,190 @@ body.light-theme .checkout-close {
 
 }
 
+
+/* ==========================================
+   FILTROS DE PRODUTOS
+========================================== */
+
+.products-filters {
+
+    max-width: 1200px;
+
+    margin: 0 auto 40px;
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 260px;
+
+    gap: 15px;
+
+}
+
+
+/* ==========================================
+   INPUT E SELECT
+========================================== */
+
+.products-search input,
+.products-category select {
+
+    width: 100%;
+
+    box-sizing: border-box;
+
+    padding: 14px 16px;
+
+    border-radius: 8px;
+
+    border: 1px solid
+        rgba(57, 255, 20, 0.25);
+
+    background: #111;
+
+    color: #fff;
+
+    font-size: 15px;
+
+    outline: none;
+
+    transition: 0.2s;
+
+}
+
+
+.products-search input:focus,
+.products-category select:focus {
+
+    border-color: #39FF14;
+
+    box-shadow:
+        0 0 8px
+        rgba(57, 255, 20, 0.15);
+
+}
+
+
+.products-search input::placeholder {
+
+    color: #777;
+
+}
+
+
+.products-category select {
+
+    cursor: pointer;
+
+}
+
+
+.products-category select option {
+
+    background: #111;
+
+    color: #fff;
+
+}
+
+
+/* ==========================================
+   SEM RESULTADOS
+========================================== */
+
+.produtos-sem-resultado {
+
+    grid-column: 1 / -1;
+
+    width: 100%;
+
+    text-align: center;
+
+    padding: 40px 20px;
+
+    color: #888;
+
+}
+
+
+.produtos-carregando {
+
+    grid-column: 1 / -1;
+
+    width: 100%;
+
+    text-align: center;
+
+    padding: 40px 20px;
+
+    color: #888;
+
+}
+
+
+.produtos-erro {
+
+    grid-column: 1 / -1;
+
+    width: 100%;
+
+    text-align: center;
+
+    padding: 40px 20px;
+
+    color: #ff4d4d;
+
+}
+
+
+/* ==========================================
+   TEMA CLARO
+========================================== */
+
+body.light-theme
+.products-search input,
+
+body.light-theme
+.products-category select {
+
+    background: #fff;
+
+    color: #111;
+
+    border-color: #ccc;
+
+}
+
+
+body.light-theme
+.products-search input::placeholder {
+
+    color: #999;
+
+}
+
+
+body.light-theme
+.products-category select option {
+
+    background: #fff;
+
+    color: #111;
+
+}
+
+
+/* ==========================================
+   RESPONSIVO
+========================================== */
+
+@media (max-width: 700px) {
+
+    .products-filters {
+
+        grid-template-columns: 1fr;
+
+    }
+
+}
+

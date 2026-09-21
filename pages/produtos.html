@@ -2,73 +2,125 @@
 <html lang="pt-br">
 
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Produtos</title>
 
     <link rel="stylesheet" href="../css/style.css">
+
     <link rel="icon" type="image/png" href="../imgs/logo2.png">
+
 </head>
 
+
 <body>
+
 
     <!-- =========================
          NAVBAR
     ========================== -->
 
     <header>
+
         <nav>
 
+
             <!-- LOGO -->
+
             <a class="logo" href="../index.html">
-                <img src="../imgs/logo2.png" alt="logo" />
+
+                <img src="../imgs/logo2.png" alt="logo">
+
             </a>
 
+
+
             <!-- MENU MOBILE -->
+
             <div class="mobile-menu">
+
                 <div class="line1"></div>
+
                 <div class="line2"></div>
+
                 <div class="line3"></div>
+
             </div>
 
+
+
             <!-- MENU -->
+
             <ul class="nav-list">
+
+
                 <li id="navProdutos">
+
                     <a href="../pages/produtos.html" title="Produtos">
+
                         <img src="../imgs/product.svg" alt="Produtos">
+
                     </a>
+
                 </li>
+
 
 
                 <li>
+
                     <a href="../pages/login-cadastro.html" title="Cadastro">
+
                         <img src="../imgs/person-fill.svg" alt="Cadastro">
+
                     </a>
+
                 </li>
+
+
 
                 <li id="navCarrinho">
+
                     <a href="../pages/carrinho.html" title="Carrinho">
+
                         <img src="../imgs/cart4.svg" alt="Carrinho">
+
                     </a>
-                </li>
-                <li>
-                    <a href="../pages/admin.html" title="Admin">
-                        <img src="../imgs/shield-fill.svg" alt="Admin">
-                    </a>
+
                 </li>
 
+
+
+                <li>
+
+                    <a href="../pages/admin.html" title="Admin">
+
+                        <img src="../imgs/shield-fill.svg" alt="Admin">
+
+                    </a>
+
+                </li>
+
+
+
                 <!-- BOTÃO TEMA -->
-                <button class="theme-button" id="themeButton" title="Alterar tema">
+
+                <button class="theme-button" id="themeButton" title="Alterar tema" type="button">
+
                     <img src="../imgs/mudar tema.svg" alt="Alterar tema">
+
                 </button>
+
+
             </ul>
 
 
-
-
         </nav>
+
     </header>
+
 
 
     <!-- =========================
@@ -77,40 +129,109 @@
 
     <main>
 
+
         <section class="products">
+
 
             <!-- CABEÇALHO -->
 
             <div class="products-header">
 
-                <span>DRAGON SUPLEMENTOS</span>
+                <span>
+                    DRAGON SUPLEMENTOS
+                </span>
+
 
                 <h1>
-                    NOSSOS <strong>PRODUTOS</strong>
+
+                    NOSSOS
+                    <strong>PRODUTOS</strong>
+
                 </h1>
 
+
                 <p>
+
                     Suplementos para acompanhar sua evolução,
                     melhorar seu desempenho e alcançar seus objetivos.
+
                 </p>
 
             </div>
+
+
+
+            <!-- =========================
+                 FILTROS
+            ========================== -->
+
+            <div class="products-filters">
+
+
+                <!-- PESQUISA -->
+
+                <div class="products-search">
+
+                    <input type="text" id="pesquisaProduto" placeholder="Pesquisar produto..." autocomplete="off">
+
+                </div>
+
+
+
+                <!-- CATEGORIA -->
+
+                <div class="products-category">
+
+                    <select id="filtroCategoria">
+
+                        <option value="">
+                            Todas as categorias
+                        </option>
+
+                        <option value="suplementos">
+                            Suplementos
+                        </option>
+
+                        <option value="roupas">
+                            Roupas
+                        </option>
+
+                        <option value="acessorios">
+                            Acessórios
+                        </option>
+
+                        <option value="equipamentos">
+                            Equipamentos
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+            </div>
+
 
 
             <!-- =========================
                  GRID DE PRODUTOS
             ========================== -->
 
-
             <div class="products-grid">
-                <!-- Os produtos cadastrados no banco aparecerão aqui automaticamente -->
-            </div>
 
+                <!--
+                    Os produtos cadastrados
+                    no banco aparecerão aqui
+                    automaticamente.
+                -->
+
+            </div>
 
 
         </section>
 
     </main>
+
 
 
     <!-- =========================
@@ -120,18 +241,23 @@
     <footer class="footer">
 
         <p>
+
             © 2026 Dragon Suplementos.
             Todos os direitos reservados.
+
         </p>
 
     </footer>
 
 
-    <!-- JAVASCRIPT -->
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
 
     <script src="../js/script.js"></script>
-    <script src="../js/produtos.js"></script>
 
+    <script src="../js/produtos.js"></script>
 
 
 </body>

@@ -251,3 +251,107 @@ async function adicionarAoCarrinho(produtoId) {
         );
     }
 }
+
+
+// ==========================================
+// FILTRO DOS PRODUTOS
+// ==========================================
+
+function aplicarFiltros() {
+
+    const campoPesquisa =
+        document.getElementById("pesquisaProduto");
+
+    const filtroCategoria =
+        document.getElementById("filtroCategoria");
+
+
+    const termo =
+        campoPesquisa
+            ? campoPesquisa.value
+                .trim()
+                .toLowerCase()
+            : "";
+
+
+    const categoria =
+        filtroCategoria
+            ? filtroCategoria.value
+                .toLowerCase()
+            : "";
+
+
+    const produtosFiltrados =
+        produtos.filter(produto => {
+
+            const nome =
+                String(
+                    produto.nome || ""
+                ).toLowerCase();
+
+
+            const descricao =
+                String(
+                    produto.descricao || ""
+                ).toLowerCase();
+
+
+            const categoriaProduto =
+                String(
+                    produto.categoria || ""
+                ).toLowerCase();
+
+
+            const correspondePesquisa =
+                termo === "" ||
+                nome.includes(termo) ||
+                descricao.includes(termo);
+
+
+            const correspondeCategoria =
+                categoria === "" ||
+                categoriaProduto === categoria;
+
+
+            return (
+                correspondePesquisa &&
+                correspondeCategoria
+            );
+
+        });
+
+
+    mostrarProdutos(produtosFiltrados);
+}
+
+
+// ==========================================
+// EVENTOS DOS FILTROS
+// ==========================================
+
+const campoPesquisa =
+    document.getElementById("pesquisaProduto");
+
+const filtroCategoria =
+    document.getElementById("filtroCategoria");
+
+
+if (campoPesquisa) {
+
+    campoPesquisa.addEventListener(
+        "input",
+        aplicarFiltros
+    );
+
+}
+
+
+if (filtroCategoria) {
+
+    filtroCategoria.addEventListener(
+        "change",
+        aplicarFiltros
+    );
+
+}
+
