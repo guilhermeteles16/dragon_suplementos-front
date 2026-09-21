@@ -862,8 +862,7 @@ loginMessage.className =
 
 setTimeout(() => {
 
-    window.location.href =
-        "produtos.html";
+   
 
 }, 2000);
 
