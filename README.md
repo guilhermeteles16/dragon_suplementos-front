@@ -34,8 +34,7 @@ O projeto consiste em uma loja virtual para apresentação e gerenciamento de pr
 dragon-suplementos-front/
 │
 ├── css/
-│   ├── style.css
-│   └── outros estilos...
+│   └── style.css
 │
 ├── imgs/
 │   ├── logo2.png
@@ -43,12 +42,15 @@ dragon-suplementos-front/
 │   ├── person-fill.svg
 │   ├── cart4.svg
 │   ├── shield-fill.svg
-│   └── outros arquivos...
+│   ├── mudar tema.svg
+│   └── outros arquivos de imagem...
 │
 ├── js/
-│   ├── script.js
+│   ├── cadastro-produtos.js
+│   ├── carrinho.js
+│   ├── login-cadastro.js
 │   ├── produtos.js
-│   └── cadastro-produtos.js
+│   └── script.js
 │
 ├── pages/
 │   ├── produtos.html
