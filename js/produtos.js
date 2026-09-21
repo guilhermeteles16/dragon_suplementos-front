@@ -258,7 +258,7 @@ function aplicarFiltros() {
             : "";
 
 
-    const categoria =
+    const categoriaSelecionada =
         filtroCategoria
             ? filtroCategoria.value
                 .trim()
@@ -281,11 +281,27 @@ function aplicarFiltros() {
                 ).toLowerCase();
 
 
+            // Aceita categoria como texto
             const categoriaProduto =
                 String(
                     produto.categoria || ""
-                ).toLowerCase();
+                )
+                    .trim()
+                    .toLowerCase();
 
+
+            // Também verifica categoria_id
+            const categoriaId =
+                String(
+                    produto.categoria_id || ""
+                )
+                    .trim()
+                    .toLowerCase();
+
+
+            // ==================================
+            // PESQUISA
+            // ==================================
 
             const correspondePesquisa =
                 termo === "" ||
@@ -293,9 +309,23 @@ function aplicarFiltros() {
                 descricao.includes(termo);
 
 
-            const correspondeCategoria =
-                categoria === "" ||
-                categoriaProduto === categoria;
+            // ==================================
+            // CATEGORIA
+            // ==================================
+
+            let correspondeCategoria = true;
+
+
+            if (categoriaSelecionada !== "") {
+
+                correspondeCategoria =
+                    categoriaProduto ===
+                        categoriaSelecionada ||
+
+                    categoriaId ===
+                        categoriaSelecionada;
+
+            }
 
 
             return (
@@ -306,12 +336,27 @@ function aplicarFiltros() {
         });
 
 
+    console.log(
+        "🔎 Pesquisa:",
+        termo
+    );
+
+    console.log(
+        "🏷️ Categoria selecionada:",
+        categoriaSelecionada
+    );
+
+    console.log(
+        "📦 Produtos filtrados:",
+        produtosFiltrados
+    );
+
+
     mostrarProdutos(
         produtosFiltrados
     );
 
 }
-
 
 // ==========================================
 // ADICIONAR PRODUTO AO CARRINHO
