@@ -224,6 +224,16 @@ function mostrarProdutos(lista) {
 
         `;
 
+        card.addEventListener("click", (evento) => {
+
+            if (evento.target.closest(".add-cart")) {
+                return;
+            }
+
+            mostrarDetalhes(produto);
+
+        });
+
 
         productsGrid.appendChild(card);
 
@@ -320,10 +330,10 @@ function aplicarFiltros() {
 
                 correspondeCategoria =
                     categoriaProduto ===
-                        categoriaSelecionada ||
+                    categoriaSelecionada ||
 
                     categoriaId ===
-                        categoriaSelecionada;
+                    categoriaSelecionada;
 
             }
 
@@ -530,3 +540,88 @@ document.addEventListener(
     }
 );
 
+
+// ==========================================
+// DETALHES DO PRODUTO
+// ==========================================
+
+function mostrarDetalhes(produto) {
+
+    const modal = document.createElement("div");
+
+    modal.className = "modal-produto";
+
+    modal.innerHTML = `
+
+        <div class="modal-conteudo">
+
+            <button class="fechar-modal">
+                ×
+            </button>
+
+            <img
+                src="${produto.imagem || "../imgs/product.svg"}"
+                alt="${produto.nome}"
+            >
+
+            <div class="modal-info">
+
+                <span>
+                    ${produto.categoria || "PRODUTO"}
+                </span>
+
+                <h2>
+                    ${produto.nome}
+                </h2>
+
+                <p>
+                    ${produto.descricao || "Sem descrição."}
+                </p>
+
+                <strong>
+                    ${Number(produto.preco || 0).toLocaleString(
+                        "pt-BR",
+                        {
+                            style: "currency",
+                            currency: "BRL"
+                        }
+                    )}
+                </strong>
+
+                <small>
+                    Estoque: ${produto.estoque ?? 0}
+                </small>
+
+                <button
+                    class="btn-modal-carrinho"
+                    onclick="adicionarAoCarrinho(${produto.id})"
+                >
+                    Adicionar ao carrinho
+                </button>
+
+            </div>
+
+        </div>
+
+    `;
+
+
+    document.body.appendChild(modal);
+
+
+    // Fechar no X
+    modal.querySelector(".fechar-modal").onclick = () => {
+        modal.remove();
+    };
+
+
+    // Fechar clicando fora
+    modal.addEventListener("click", (evento) => {
+
+        if (evento.target === modal) {
+            modal.remove();
+        }
+
+    });
+
+}
