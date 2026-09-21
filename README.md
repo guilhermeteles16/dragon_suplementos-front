@@ -6,12 +6,12 @@ O projeto consiste em uma loja virtual para apresentação e gerenciamento de pr
 
 ## Autores
 
-**Guilherme Teles da Silva**
+**Guilherme Teles da Silva** ,
 **Arthur Uezu da Cruz**
 
 ### Com auxílio de
 
-**Gustavo Moraes**
+**Gustavo Moraes** ,
 **Mateus Valente**
 
 **Etec de Poá — 2026**
