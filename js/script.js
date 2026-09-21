@@ -391,25 +391,3 @@ document.addEventListener(
 
     }
 );
-
-// ==========================================
-// ANIMAÇÃO +1
-// ==========================================
-
-function mostrarAnimacaoMaisUm() {
-
-    const maisUm =
-        document.createElement("div");
-
-    maisUm.classList.add("animacao-mais-um");
-
-    maisUm.textContent = "+1";
-
-    document.body.appendChild(maisUm);
-
-    setTimeout(() => {
-
-        maisUm.remove();
-
-    }, 1000);
-}
