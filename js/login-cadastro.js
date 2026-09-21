@@ -834,14 +834,23 @@ camposFormulario.forEach(
 );
 
 
+// ==========================================
+// LOGIN REALIZADO
+// ==========================================
 
-// ==========================================
-// LOGIN REALIZADO COM SUCESSO
-// ==========================================
+const usuario =
+    dados.usuario;
+
 
 localStorage.setItem(
     "usuarioLogado",
-    JSON.stringify(dados.usuario)
+    JSON.stringify(usuario)
+);
+
+
+console.log(
+    "✅ Usuário logado:",
+    usuario
 );
 
 
@@ -849,27 +858,24 @@ localStorage.setItem(
 // MENSAGEM DE BOAS-VINDAS
 // ==========================================
 
-loginMessage.textContent =
-    `Login realizado com sucesso! Bem-vindo, ${dados.usuario.nome}!`;
-
-loginMessage.className =
-    "form-message success";
-
-
-// ==========================================
-// REDIRECIONAR PARA PRODUTOS
-// ==========================================
-
-setTimeout(() => {
-
-   
-
-}, 2000);
-
-
-
-
-
-console.log(
-    "🔥 login-cadastro.js carregado completamente!"
+mostrarMensagem(
+    mensagem,
+    `Login realizado com sucesso! Bem-vindo, ${usuario.nome}!`,
+    "sucesso"
 );
+
+
+// ==========================================
+// REDIRECIONA PARA PRODUTOS
+// ==========================================
+
+setTimeout(
+    function () {
+
+        window.location.href =
+            "produtos.html";
+
+    },
+    2000
+);
+
