@@ -834,6 +834,7 @@ camposFormulario.forEach(
 );
 
 
+
 // ==========================================
 // LOGIN REALIZADO COM SUCESSO
 // ==========================================
@@ -844,24 +845,28 @@ localStorage.setItem(
 );
 
 
-// Mostrar mensagem de sucesso
+// ==========================================
+// MENSAGEM DE BOAS-VINDAS
+// ==========================================
 
 loginMessage.textContent =
     `Login realizado com sucesso! Bem-vindo, ${dados.usuario.nome}!`;
 
-loginMessage.classList.remove("error");
+loginMessage.className =
+    "form-message success";
 
-loginMessage.classList.add("success");
 
-
-// Ir para produtos depois de um pequeno tempo
+// ==========================================
+// REDIRECIONAR PARA PRODUTOS
+// ==========================================
 
 setTimeout(() => {
 
     window.location.href =
         "produtos.html";
 
-}, 1500);
+}, 2000);
+
 
 
 
