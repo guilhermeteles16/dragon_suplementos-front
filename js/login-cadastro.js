@@ -834,6 +834,38 @@ camposFormulario.forEach(
 );
 
 
+// ==========================================
+// LOGIN REALIZADO COM SUCESSO
+// ==========================================
+
+localStorage.setItem(
+    "usuarioLogado",
+    JSON.stringify(dados.usuario)
+);
+
+
+// Mostrar mensagem de sucesso
+
+loginMessage.textContent =
+    `Login realizado com sucesso! Bem-vindo, ${dados.usuario.nome}!`;
+
+loginMessage.classList.remove("error");
+
+loginMessage.classList.add("success");
+
+
+// Ir para produtos depois de um pequeno tempo
+
+setTimeout(() => {
+
+    window.location.href =
+        "produtos.html";
+
+}, 1500);
+
+
+
+
 console.log(
     "🔥 login-cadastro.js carregado completamente!"
 );
