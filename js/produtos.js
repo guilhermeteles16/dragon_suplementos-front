@@ -380,10 +380,16 @@ async function adicionarAoCarrinho(produtoId) {
     );
 
 
-    // Usuário temporário
-    // Depois vamos pegar isso do login
+    const usuarioLogado = JSON.parse(
+        localStorage.getItem("usuarioLogado")
+    );
 
-    const usuarioId = 1;
+    if (!usuarioLogado || !usuarioLogado.id) {
+        alert("Faça login para adicionar produtos ao carrinho.");
+        return;
+    }
+
+    const usuarioId = usuarioLogado.id;
 
 
     try {
@@ -580,12 +586,12 @@ function mostrarDetalhes(produto) {
 
                 <strong>
                     ${Number(produto.preco || 0).toLocaleString(
-                        "pt-BR",
-                        {
-                            style: "currency",
-                            currency: "BRL"
-                        }
-                    )}
+        "pt-BR",
+        {
+            style: "currency",
+            currency: "BRL"
+        }
+    )}
                 </strong>
 
                 <small>
